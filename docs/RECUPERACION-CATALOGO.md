@@ -81,10 +81,19 @@ lista de originales en `media-originales-*.txt`.
 - Wayback Machine: no tiene nada archivado de `api.ceromarket.com.uy`.
 - Listado de directorio por HTTP: devuelve 403.
 
-**Queda una vía sin agotar, y es la mejor:** los backups automáticos de
-Hostinger, en hPanel → Backups. La API pública no los expone, así que hay
-que mirarlos a mano. Si hay un dump de la base de los últimos meses, se
-recupera todo lo de la lista anterior.
+**Backups automáticos de Hostinger (revisados el 2026-11-19).** En hPanel
+hay backups de bases del 2026-10-04 al 2026-11-18. El WordPress funcionó al
+menos hasta el 2026-09-04 (registros de WooCommerce), pero en el backup más
+viejo la base de CERO Market ya no está. Se revisaron además, solo leyendo
+por phpMyAdmin, las 29 bases actuales de la cuenta: ninguna es de este sitio.
+
+La única base del backup del 2026-10-04 que hoy no existe,
+`u442660975_NEXTLEVEL`, se descargó y se revisó: pesa 6 KB y es de otra
+aplicación (estrategias y rendimientos, sin nada de CERO Market). Se borró
+la copia local después de revisarla.
+
+**Conclusión: la base se perdió.** Precios y catálogo completo hay que
+cargarlos a mano.
 
 ## Notas de método
 
