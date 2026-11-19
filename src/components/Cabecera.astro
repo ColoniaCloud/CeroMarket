@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/sitio/logo-oscuro.webp";
+import { enlaceWhatsapp } from "../lib/ajustes";
+import { obtenerPosts } from "../lib/posts";
+
+// Blog y Recetas aparecen en el menú solo cuando hay algo publicado: hoy
+// los posts recuperados son borradores y no tiene sentido mandar a nadie a
+// una página vacía.
+const posts = await obtenerPosts();
+const hayRecetas = posts.some((post) => post.data.tipo === "receta");
+
+const enlaces = [
+  { href: "/productos/", texto: "Productos", activo: ["/productos", "/producto/"] },
+  { href: "/mision-zero-waste/", texto: "Misión zero waste" },
+  ...(hayRecetas ? [{ href: "/recetas/", texto: "Recetas" }] : []),
+  ...(posts.length > 0 ? [{ href: "/blog/", texto: "Blog" }] : []),
+  { href: "/sobre-nosotros/", texto: "Sobre nosotros" },
+  { href: "/contacto/", texto: "Contacto" },
+];
+
+const ruta = Astro.url.pathname;
+const estaActivo = (enlace: (typeof enlaces)[number]) =>
+  (enlace.activo ?? [enlace.href]).some((prefijo) => ruta.startsWith(prefijo.replace(/\/$/, "")));
+
+const whatsapp = enlaceWhatsapp("Hola, les escribo desde la web de CERO Market.");
+---
+
+<header class="cabecera sticky top-0 z-40 border-b border-linea bg-blanco/90 backdrop-blur-md">
+  <div class="contenedor flex h-16 items-center justify-between gap-6 lg:h-20">
+    <a href="/" class="shrink-0" aria-label="CERO Market, inicio">
+      <Image src={logo} alt="" width={156} densities={[1, 1.25]} loading="eager" class="h-auto w-[132px] lg:w-[156px]" />
+    </a>
+
+    <nav aria-label="Principal" class="hidden lg:block">
+      <ul class="flex items-center gap-7 text-[0.95rem] font-medium">
+        {
+          enlaces.map((enlace) => (
+            <li>
+              <a
+                href={enlace.href}
+                aria-current={estaActivo(enlace) ? "page" : undefined}
+                class="py-2 underline-offset-[0.45em] decoration-menta decoration-[3px] hover:underline aria-[current=page]:underline"
+              >
+                {enlace.texto}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href={whatsapp} target="_blank" rel="noopener" class="boton hidden min-h-11 py-2 text-[0.95rem] sm:inline-flex">
+        Hablemos
+      </a>
+      <button
+        type="button"
+        popovertarget="menu-movil"
+        class="flex size-11 items-center justify-center rounded-full hover:bg-niebla lg:hidden"
+        aria-label="Abrir menú"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 8h16M4 16h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="menu-movil" popover class="menu-movil lg:hidden">
+    <div class="contenedor flex h-full flex-col">
+      <div class="flex h-16 items-center justify-end">
+        <button
+          type="button"
+          popovertarget="menu-movil"
+          popovertargetaction="hide"
+          class="flex size-11 items-center justify-center rounded-full hover:bg-blanco/40"
+          aria-label="Cerrar menú"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+      <nav aria-label="Principal" class="flex flex-1 flex-col justify-center pb-16">
+        <ul class="space-y-1">
+          <li>
+            <a href="/" class="titular-cartel block py-1 text-[clamp(2.75rem,13vw,4.5rem)]">Inicio</a>
+          </li>
+          {
+            enlaces.map((enlace) => (
+              <li>
+                <a
+                  href={enlace.href}
+                  aria-current={estaActivo(enlace) ? "page" : undefined}
+                  class="titular-cartel block py-1 text-[clamp(2.75rem,13vw,4.5rem)] aria-[current=page]:underline decoration-[0.08em] underline-offset-[0.12em]"
+                >
+                  {enlace.texto}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={whatsapp} target="_blank" rel="noopener" class="boton mt-10 self-start">Escribinos por WhatsApp</a>
+      </nav>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,64 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { fechaLegible, obtenerPosts, type Post } from "../../lib/posts";
+
+export const getStaticPaths = (async () => {
+  const posts = await obtenerPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { titulo, bajada, portada, tipo, borrador } = post.data;
+const { Content } = await render(post);
+const fecha = fechaLegible(post);
+const volver = tipo === "receta" ? { href: "/recetas/", texto: "Todas las recetas" } : { href: "/blog/", texto: "Todas las notas" };
+---
+
+<Base titulo={titulo} descripcion={bajada || undefined} imagen={portada ?? undefined}>
+  <article class="pt-10 pb-24 lg:pt-14">
+    <header class="contenedor">
+      {
+        borrador && (
+          <p class="mb-8 inline-block rounded-full bg-pizarra px-4 py-1.5 text-sm text-blanco">
+            Borrador: se ve en desarrollo y no se publica
+          </p>
+        )
+      }
+      <p class="flex flex-wrap gap-x-3 text-gris">
+        <a href={volver.href} class="enlace font-semibold text-pizarra">{tipo === "receta" ? "Receta" : "Nota"}</a>
+        {fecha && <time datetime={post.data.fecha?.toISOString()}>{fecha}</time>}
+      </p>
+      <h1 class="titular-cartel mt-4 max-w-[18ch] text-[clamp(2.75rem,7vw,6rem)] uppercase">{titulo}</h1>
+      {bajada && <p class="mt-8 max-w-[60ch] text-xl leading-relaxed">{bajada}</p>}
+    </header>
+
+    {
+      portada && (
+        <div class="contenedor mt-12">
+          <Image
+            src={portada}
+            alt=""
+            widths={[640, 1000, 1400]}
+            sizes="(min-width: 1440px) 1360px, 100vw"
+            loading="eager"
+            class="aspect-[16/9] w-full rounded-lg object-cover"
+          />
+        </div>
+      )
+    }
+
+    <div class="contenedor mt-12">
+      <div class="prosa text-lg">
+        <Content />
+      </div>
+      <a href={volver.href} class="enlace mt-16 inline-block font-semibold">{volver.texto}</a>
+    </div>
+  </article>
+</Base>

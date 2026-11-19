@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import ilustracion from "../assets/sitio/ilustracion-frascos.jpg";
+import fotoFrascos from "../assets/sitio/frascos-repisa.jpg";
+import fotoRecarga from "../assets/sitio/recarga.jpg";
+import fotoPasillo from "../assets/sitio/local-pasillo.jpg";
+
+const pasos = [
+  {
+    titulo: "Traé tus envases",
+    texto: "Frascos, bolsas de tela, botellas: lo que ya tengas en casa. Pesalos vacíos antes de llenarlos, así pagás solo lo que llevás adentro.",
+    foto: fotoFrascos,
+    alt: "Frascos de vidrio en una repisa de madera",
+  },
+  {
+    titulo: "Llenalos con lo justo",
+    texto: "Elegí entre los productos a granel y servite según lo que necesitás. También hay recarga de líquidos para tus botellas.",
+    foto: fotoRecarga,
+    alt: "Una persona recarga una botella de vidrio en un dispensador del local",
+  },
+  {
+    titulo: "Pesá, pagá y seguí",
+    texto: "Llevate solo lo necesario. Sin envases descartables, sin packaging de más y sin comprar de sobra.",
+    foto: fotoPasillo,
+    alt: "Pasillo del local con contenedores de granel a ambos lados",
+  },
+];
+---
+
+<Base titulo="Misión zero waste" descripcion="Cómo se compra a granel en CERO Market y por qué: menos plástico de un solo uso, más economía circular.">
+  <section class="bg-menta">
+    <div class="contenedor grid items-end gap-10 pt-12 pb-14 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:pt-16 lg:pb-20">
+      <div>
+        <h1 class="titular-cartel text-[clamp(3.5rem,10vw,9rem)] uppercase">Misión CERO</h1>
+        <p class="mt-8 max-w-[44ch] text-xl leading-relaxed lg:text-2xl">
+          Nos comprometemos a reducir residuos y a fomentar un consumo responsable. La Misión CERO busca inspirar cambios diarios que reduzcan el plástico y promuevan una economía circular.
+        </p>
+      </div>
+      <Image
+        src={ilustracion}
+        alt=""
+        widths={[400, 700]}
+        sizes="(min-width: 1024px) 30vw, 70vw"
+        class="w-2/3 max-w-sm justify-self-end rounded-lg mix-blend-multiply lg:w-full"
+      />
+    </div>
+  </section>
+
+  <section data-pasos aria-labelledby="pasos-titulo" class="contenedor py-20 lg:py-28">
+    <h2 id="pasos-titulo" class="titular-cartel text-[clamp(2.5rem,6vw,5rem)] uppercase">En tres pasos</h2>
+
+    <div class="mt-12 grid gap-16 lg:mt-4 lg:grid-cols-2 lg:gap-20">
+      <ol class="space-y-20 lg:space-y-0">
+        {
+          pasos.map((paso, indice) => (
+            <li data-paso class="lg:flex lg:min-h-[85vh] lg:flex-col lg:justify-center">
+              <span data-paso-numero class="titular-cartel block text-[clamp(6rem,14vw,12rem)] text-pizarra transition-opacity duration-500" aria-hidden="true">
+                {indice + 1}
+              </span>
+              <h3 class="mt-2 text-3xl font-bold lg:text-4xl">{paso.titulo}</h3>
+              <p class="mt-4 max-w-[40ch] text-lg text-gris">{paso.texto}</p>
+              <Image
+                src={paso.foto}
+                alt={paso.alt}
+                widths={[480, 800]}
+                sizes="100vw"
+                class="mt-8 aspect-[4/5] w-full rounded-lg object-cover sm:aspect-[4/3] lg:hidden"
+              />
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="hidden lg:block">
+        <div class="sticky top-[calc(50vh-min(36vh,22rem))] h-[min(72vh,44rem)] overflow-hidden rounded-lg bg-niebla">
+          {
+            pasos.map((paso, indice) => (
+              <Image
+                data-paso-foto
+                src={paso.foto}
+                alt={paso.alt}
+                widths={[640, 960]}
+                sizes="45vw"
+                class:list={["absolute inset-0 size-full object-cover", { "[clip-path:inset(100%_0_0_0)]": indice > 0 }]}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-menta">
+    <div class="contenedor flex flex-wrap items-end justify-between gap-10 py-20 lg:py-24">
+      <p class="titular-cartel max-w-[16ch] text-[clamp(2.5rem,6vw,5rem)] uppercase">
+        Cada frasco que volvés a llenar es un envase menos.
+      </p>
+      <a href="/productos/" class="boton text-lg">Ver los productos</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import "../scripts/mision";
+</script>

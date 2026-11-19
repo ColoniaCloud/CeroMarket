@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from "astro";
+import Base from "../../layouts/Base.astro";
+import Catalogo from "../../components/Catalogo.astro";
+import { CATEGORIAS, type CategoriaSlug } from "../../lib/categorias";
+import { obtenerProductos } from "../../lib/productos";
+
+export const getStaticPaths = (() =>
+  CATEGORIAS.map(({ slug, nombre }) => ({ params: { categoria: slug }, props: { slug, nombre } }))) satisfies GetStaticPaths;
+
+interface Props {
+  slug: CategoriaSlug;
+  nombre: string;
+}
+
+const { slug, nombre } = Astro.props;
+const productos = await obtenerProductos();
+---
+
+<Base titulo={nombre} descripcion={`${nombre} a granel en CERO Market, Pocitos, Montevideo.`}>
+  <Catalogo productos={productos} categoria={slug} />
+</Base>

@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import IconoWhatsapp from "../components/IconoWhatsapp.astro";
+import { enlaceWhatsapp } from "../lib/ajustes";
+import fotoPasillo from "../assets/sitio/local-pasillo.jpg";
+import fotoRepisa from "../assets/sitio/frascos-repisa.jpg";
+---
+
+<Base titulo="Sobre nosotros" descripcion="CERO Market es un supermercado sustentable en Pocitos: productos naturales y a granel para reducir envases y plásticos de un solo uso.">
+  <section class="contenedor pt-12 pb-20 lg:pt-16 lg:pb-28">
+    <h1 class="titular-cartel text-[clamp(3.5rem,10vw,9rem)] uppercase">Sobre nosotros</h1>
+
+    <div class="mt-12 grid items-start gap-12 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-20">
+      <Image
+        src={fotoPasillo}
+        alt="Pasillo del local con contenedores de granel y estanterías de madera"
+        widths={[480, 800, 1100]}
+        sizes="(min-width: 1024px) 45vw, 100vw"
+        loading="eager"
+        class="aspect-[4/5] w-full rounded-lg object-cover"
+      />
+      <div class="lg:pt-6">
+        <p class="text-[clamp(1.6rem,3vw,2.5rem)] leading-tight font-semibold">
+          CERO Market es un supermercado sustentable que promueve un consumo más responsable y consciente.
+        </p>
+        <p class="mt-8 max-w-[52ch] text-lg">
+          Ofrecemos productos naturales y a granel para reducir los envases y el plástico de un solo uso.
+        </p>
+        <p class="mt-4 max-w-[52ch] text-lg">
+          Somos una comunidad comprometida con la salud, la sostenibilidad y el amor por nuestro planeta.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+          <a href={enlaceWhatsapp("Hola, quiero saber más sobre CERO Market.")} target="_blank" rel="noopener" class="boton text-lg">
+            <IconoWhatsapp tamano={22} />
+            Hablemos
+          </a>
+          <a href="/mision-zero-waste/" class="enlace text-lg font-semibold">La misión zero waste</a>
+        </div>
+        <Image
+          src={fotoRepisa}
+          alt="Frascos de vidrio con el logo de CERO Market sobre una repisa"
+          widths={[400, 700]}
+          sizes="(min-width: 1024px) 25vw, 60vw"
+          class="mt-16 ml-auto aspect-square w-3/5 rounded-lg object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-niebla">
+    <div class="contenedor flex flex-wrap items-end justify-between gap-8 py-16 lg:py-20">
+      <h2 class="titular-cartel max-w-[18ch] text-[clamp(2.25rem,5vw,4rem)] uppercase">¿Te gustaría trabajar con nosotros?</h2>
+      <a href="/trabaja-con-nosotros/" class="boton boton-borde">Dejanos tus datos</a>
+    </div>
+  </section>
+</Base>

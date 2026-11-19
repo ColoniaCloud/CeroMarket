@@ -1,0 +1,11 @@
+nombre: Bombonera de frutos nativos
+marca: Autóctonario
+presentacion: 6 bombones
+categoria: dulces
+descripcion: Bombonera de 6 bombones de chocolate rellenos de arazá, butiá y guayabo. Esta caja muestra en su mejor expresión el sabor de cada uno de los frutos nativos. Cada bombón tiene un tamaño mayor al de un bombón tradicional para que sea consumido en dos bocados y así sentir el sabor, ver la textura y color de cada fruta. El empaque posee información sobre los frutos, dónde y cuando crecen, algunas de sus propiedades y características. Arazá, guayabo del país y butiá.
+imagen: ../../assets/productos/bombonera-x6-frutos-nativos/imagen.jpg
+galeria:
+  - ../../assets/productos/bombonera-x6-frutos-nativos/galeria-1.png
+  - ../../assets/productos/bombonera-x6-frutos-nativos/galeria-2.jpg
+destacado: true
+disponible: true

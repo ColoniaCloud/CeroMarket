@@ -1,0 +1,36 @@
+---
+import TarjetaPost from "./TarjetaPost.astro";
+import { ajustes } from "../lib/ajustes";
+import type { Post } from "../lib/posts";
+
+interface Props {
+  titulo: string;
+  bajada: string;
+  posts: Post[];
+  vacio: string;
+}
+
+const { titulo, bajada, posts, vacio } = Astro.props;
+---
+
+<section class="contenedor pt-12 pb-20 lg:pt-16 lg:pb-28">
+  <h1 class="titular-cartel text-[clamp(3.5rem,10vw,9rem)] uppercase">{titulo}</h1>
+  <p class="mt-6 max-w-[48ch] text-xl text-gris">{bajada}</p>
+
+  {
+    posts.length > 0 ? (
+      <ul class="mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <li>
+            <TarjetaPost post={post} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="mt-14 max-w-2xl rounded-xl bg-niebla p-8 sm:p-10">
+        <p class="text-xl font-semibold">{vacio}</p>
+        <a href={ajustes.instagram} target="_blank" rel="noopener" class="boton mt-8">Seguinos en Instagram</a>
+      </div>
+    )
+  }
+</section>

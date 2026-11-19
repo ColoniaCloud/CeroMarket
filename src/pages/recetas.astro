@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import ListaPosts from "../components/ListaPosts.astro";
+import { obtenerPosts } from "../lib/posts";
+
+const recetas = await obtenerPosts("receta");
+---
+
+<Base titulo="Recetas" descripcion="Recetas con productos a granel de CERO Market.">
+  <ListaPosts
+    titulo="Recetas"
+    bajada="Ideas para cocinar con lo que te llevás a granel."
+    posts={recetas}
+    vacio="Todavía no hay recetas publicadas."
+  />
+</Base>

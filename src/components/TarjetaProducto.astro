@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import {
+  textoDeEtiqueta,
+  transicionDeFoto,
+  urlDeProducto,
+  type Producto,
+} from "../lib/productos";
+
+interface Props {
+  producto: Producto;
+  encabezado?: "h2" | "h3";
+  carga?: "lazy" | "eager";
+}
+
+const { producto, encabezado: Encabezado = "h3", carga = "lazy" } = Astro.props;
+const { nombre, marca, imagen, disponible } = producto.data;
+const etiqueta = textoDeEtiqueta(producto);
+---
+
+<a href={urlDeProducto(producto)} class="group block">
+  <div class="relative aspect-square overflow-hidden rounded-md bg-niebla">
+    {
+      imagen ? (
+        <Image
+          src={imagen}
+          alt=""
+          widths={[300, 450, 640]}
+          sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 23vw, (min-width: 640px) 31vw, 48vw"
+          loading={carga}
+          class="size-full object-cover transition-transform duration-500 ease-salida group-hover:scale-[1.04]"
+          style={transicionDeFoto(producto)}
+        />
+      ) : (
+        <div class="flex size-full items-center justify-center p-5 text-center" style={transicionDeFoto(producto)}>
+          <span class="font-tiza text-lg leading-snug text-pizarra/75 sm:text-xl">{nombre}</span>
+        </div>
+      )
+    }
+    {!disponible && <span class="absolute top-3 left-3 rounded-full bg-blanco px-2.5 py-1 text-xs font-semibold">Sin stock</span>}
+  </div>
+  <Encabezado class="mt-3 leading-snug font-semibold group-hover:underline decoration-menta decoration-2 underline-offset-4">{nombre}</Encabezado>
+  {marca && <p class="text-[0.95rem] text-gris">{marca}</p>}
+  {etiqueta && <span class="etiqueta-pizarra mt-2">{etiqueta}</span>}
+</a>

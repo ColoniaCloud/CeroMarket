@@ -1,0 +1,10 @@
+nombre: Envoltorio ecológico chico
+marca: ""
+presentacion: ""
+categoria: hogar
+descripcion: ""
+imagen: ../../assets/productos/envoltorio-ecologico-chico/imagen.jpg
+galeria:
+  - ../../assets/productos/envoltorio-ecologico-chico/galeria-1.jpg
+destacado: false
+disponible: true

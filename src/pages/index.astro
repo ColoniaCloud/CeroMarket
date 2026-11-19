@@ -1,0 +1,235 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import TarjetaProducto from "../components/TarjetaProducto.astro";
+import TarjetaPost from "../components/TarjetaPost.astro";
+import { ajustes, enlaceWhatsapp } from "../lib/ajustes";
+import { CATEGORIAS } from "../lib/categorias";
+import { obtenerPosts } from "../lib/posts";
+import { obtenerProductos } from "../lib/productos";
+import fotoGondolas from "../assets/sitio/local-gondolas.jpg";
+import fotoFrascos from "../assets/sitio/frascos.jpg";
+import fotoEstanterias from "../assets/sitio/local-estanterias.jpg";
+
+const productos = await obtenerProductos();
+const destacados = productos.filter((producto) => producto.data.destacado).slice(0, 8);
+const posts = (await obtenerPosts()).slice(0, 3);
+
+// Índice de categorías: cada fila muestra al pasar el mouse la foto de un
+// producto de esa góndola (destacado si hay, si no el primero con foto).
+const categorias = CATEGORIAS.map((categoria) => {
+  const deLaCategoria = productos.filter((producto) => producto.data.categoria === categoria.slug);
+  const conFoto = deLaCategoria.filter((producto) => producto.data.imagen);
+  const muestra = conFoto.find((producto) => producto.data.destacado) ?? conFoto[0];
+  return { ...categoria, total: deLaCategoria.length, foto: muestra?.data.imagen ?? undefined };
+});
+
+const pasos = [
+  { titulo: "Traé tus envases", texto: "Frascos, bolsas de tela, botellas: lo que tengas en casa. Pesalos vacíos antes de llenarlos." },
+  { titulo: "Llenalos", texto: "Elegí entre los productos a granel y servite la cantidad justa, la que vas a usar." },
+  { titulo: "Pesá y pagá", texto: "Llevate solo lo necesario, sin envases descartables ni packaging de más." },
+];
+
+const [calle] = ajustes.direccion.split(",");
+const negocio = {
+  "@context": "https://schema.org",
+  "@type": "GroceryStore",
+  name: "CERO Market",
+  url: Astro.site?.href,
+  telephone: `+${ajustes.whatsapp}`,
+  email: ajustes.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: calle,
+    addressLocality: "Montevideo",
+    addressCountry: "UY",
+  },
+  hasMap: ajustes.mapa,
+  sameAs: [ajustes.instagram, ajustes.facebook],
+};
+---
+
+<Base>
+  <Fragment slot="cabeza">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(negocio)} />
+    <script is:inline>
+      // Oculta la portada hasta que corre la animación de entrada. Si GSAP
+      // no carga en 2,5 s, se muestra igual.
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("animar");
+        setTimeout(() => document.documentElement.classList.remove("animar"), 2500);
+      }
+    </script>
+  </Fragment>
+
+  <section class="bg-menta">
+    <div class="contenedor grid gap-10 pt-10 pb-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14 lg:pt-14 lg:pb-16">
+      <div class="flex flex-col justify-between gap-10">
+        <h1 data-entrada="titular" class="titular-cartel text-[clamp(3.75rem,8.6vw,9.5rem)] uppercase">
+          Cero plásticos. Cero límites.
+        </h1>
+        <div>
+          <p data-entrada="texto" class="max-w-[34ch] text-xl leading-snug lg:text-2xl">
+            Supermercado a granel en Pocitos. Comprá solo lo que necesitás, sin desperdicio ni envases de más.
+          </p>
+          <div data-entrada="texto" class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+            <a href="/productos/" class="boton text-lg">Ver los productos</a>
+            <a href={ajustes.mapa} target="_blank" rel="noopener" class="enlace text-lg font-semibold decoration-pizarra/40 hover:decoration-pizarra">Cómo llegar</a>
+          </div>
+        </div>
+      </div>
+
+      <div data-entrada="foto" class="relative aspect-[4/5] overflow-hidden rounded-lg sm:aspect-[4/3] lg:aspect-auto lg:min-h-[min(72vh,46rem)]">
+        <Image
+          src={fotoGondolas}
+          alt="Góndolas de granel del local, con palas y carteles de precio"
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 1024px) 45vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="absolute inset-0 size-full object-cover"
+        />
+        <span class="etiqueta-pizarra absolute bottom-5 left-5 text-base">{calle}, Pocitos</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="como" class="contenedor py-20 lg:py-28">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <h2 id="como" class="titular-cartel max-w-[14ch] text-[clamp(2.5rem,6vw,5rem)] uppercase">Así se compra a granel</h2>
+      <a href="/mision-zero-waste/" class="enlace font-medium">Por qué lo hacemos</a>
+    </div>
+    <ol class="mt-12 grid gap-x-10 gap-y-12 md:grid-cols-3">
+      {
+        pasos.map((paso, indice) => (
+          <li class="border-t-2 border-pizarra pt-6">
+            <span class="titular-cartel flex size-14 items-center justify-center rounded-full bg-menta text-3xl" aria-hidden="true">
+              {indice + 1}
+            </span>
+            <h3 class="mt-5 text-2xl font-bold">{paso.titulo}</h3>
+            <p class="mt-2 max-w-[38ch] text-gris">{paso.texto}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  {
+    destacados.length > 0 && (
+      <section aria-labelledby="elegidos" class="contenedor pb-20 lg:pb-28">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <h2 id="elegidos" class="titular-cartel text-[clamp(2.5rem,6vw,5rem)] uppercase">Elegidos del local</h2>
+          <a href="/productos/" class="enlace font-medium">Ver los {productos.length} productos</a>
+        </div>
+        <ul class="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
+          {destacados.map((producto) => (
+            <li>
+              <TarjetaProducto producto={producto} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section aria-labelledby="gondolas" class="border-t border-linea">
+    <div class="contenedor pt-20 pb-10 lg:pt-28">
+      <h2 id="gondolas" class="titular-cartel text-[clamp(2.5rem,6vw,5rem)] uppercase">Qué hay en las góndolas</h2>
+    </div>
+    <ul class="border-t border-linea">
+      {
+        categorias.map((categoria) => (
+          <li class="border-b border-linea">
+            <a href={`/productos/${categoria.slug}/`} class="group block transition-colors duration-300 hover:bg-menta focus-visible:bg-menta">
+              <div class="contenedor relative flex items-center justify-between gap-6 py-4 lg:py-5">
+                <span class="titular-cartel text-[clamp(2rem,5vw,4.25rem)] uppercase transition-transform duration-300 ease-salida group-hover:translate-x-3">
+                  {categoria.nombre}
+                </span>
+                <span class="flex shrink-0 items-center gap-6">
+                  {categoria.foto && (
+                    <Image
+                      src={categoria.foto}
+                      alt=""
+                      width={160}
+                      height={160}
+                      densities={[1, 2]}
+                      class="hidden size-20 rotate-3 rounded-md object-cover opacity-0 transition duration-300 ease-salida group-hover:rotate-0 group-hover:opacity-100 md:block"
+                    />
+                  )}
+                  <span class="w-10 text-right text-lg font-semibold tabular-nums">{categoria.total}</span>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="transition-transform duration-300 ease-salida group-hover:translate-x-1">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby="propuesta" class="bg-niebla">
+    <div class="contenedor grid items-center gap-12 py-20 lg:grid-cols-2 lg:gap-20 lg:py-28">
+      <Image
+        src={fotoFrascos}
+        alt="Frascos de vidrio con el logo de CERO Market"
+        widths={[480, 720, 900]}
+        sizes="(min-width: 1024px) 45vw, 100vw"
+        class="aspect-square w-full rounded-lg object-cover"
+      />
+      <div>
+        <h2 id="propuesta" class="titular-cartel max-w-[12ch] text-[clamp(2.5rem,6vw,5rem)] uppercase">Una propuesta sustentable</h2>
+        <p class="mt-8 max-w-[46ch] text-xl leading-relaxed">
+          Proponemos alternativas para reducir el plástico de un solo uso y volver a conectar con la Tierra.
+        </p>
+        <p class="mt-4 max-w-[46ch] text-xl leading-relaxed">
+          Más que un supermercado sustentable, somos una comunidad de personas que cuida el planeta.
+        </p>
+        <a href="/sobre-nosotros/" class="boton boton-borde mt-10">Conocenos</a>
+      </div>
+    </div>
+  </section>
+
+  {
+    posts.length > 0 && (
+      <section aria-labelledby="blog" class="contenedor py-20 lg:py-28">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <h2 id="blog" class="titular-cartel text-[clamp(2.5rem,6vw,5rem)] uppercase">Del blog</h2>
+          <a href="/blog/" class="enlace font-medium">Ver todas las notas</a>
+        </div>
+        <ul class="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <li>
+              <TarjetaPost post={post} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section aria-labelledby="visita" class:list={["contenedor grid items-center gap-12 pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20 lg:pb-28", { "pt-20 lg:pt-28": posts.length === 0, "border-t border-linea pt-20 lg:pt-28": posts.length > 0 }]}>
+    <div>
+      <h2 id="visita" class="titular-cartel text-[clamp(2.5rem,6vw,5rem)] uppercase">Vení al local</h2>
+      <p class="mt-8 text-2xl font-semibold">{ajustes.direccion}</p>
+      <p class="mt-1 text-xl text-gris">{ajustes.horario}</p>
+      <p class="mt-6 max-w-[40ch]">{ajustes.envios}</p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href={ajustes.mapa} target="_blank" rel="noopener" class="boton">Cómo llegar</a>
+        <a href={enlaceWhatsapp("Hola, les escribo desde la web de CERO Market.")} target="_blank" rel="noopener" class="boton boton-borde">Escribinos</a>
+      </div>
+    </div>
+    <Image
+      src={fotoEstanterias}
+      alt="Estanterías de madera del local con frascos de especias y productos envasados"
+      widths={[480, 800, 1100]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      class="aspect-square w-full rounded-lg object-cover"
+    />
+  </section>
+</Base>
+
+<script>
+  import "../scripts/portada";
+</script>

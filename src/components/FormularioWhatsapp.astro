@@ -1,0 +1,43 @@
+---
+import IconoWhatsapp from "./IconoWhatsapp.astro";
+import { ajustes } from "../lib/ajustes";
+
+interface Props {
+  id: string;
+  intro: string;
+  etiquetaMensaje: string;
+  boton?: string;
+}
+
+// Sin JavaScript el formulario igual funciona: hace GET a wa.me y WhatsApp
+// toma el campo "text" (solo el mensaje). Con JavaScript se arma el
+// mensaje completo con nombre y email (scripts/formulario-whatsapp.ts).
+const { id, intro, etiquetaMensaje, boton = "Enviar por WhatsApp" } = Astro.props;
+---
+
+<form data-whatsapp data-intro={intro} action={`https://wa.me/${ajustes.whatsapp}`} method="get" target="_blank" class="space-y-6">
+  <div>
+    <label for={`${id}-nombre`} class="block font-semibold">Nombre</label>
+    <input id={`${id}-nombre`} name="nombre" data-etiqueta="Nombre" required autocomplete="name" class="campo mt-2" />
+  </div>
+  <div>
+    <label for={`${id}-email`} class="block font-semibold">Email <span class="font-normal text-gris">(opcional)</span></label>
+    <input id={`${id}-email`} name="email" type="email" data-etiqueta="Email" autocomplete="email" class="campo mt-2" />
+  </div>
+  <div>
+    <label for={`${id}-mensaje`} class="block font-semibold">{etiquetaMensaje}</label>
+    <textarea id={`${id}-mensaje`} name="text" required rows="5" class="campo mt-2 resize-y"></textarea>
+  </div>
+  <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+    <button type="submit" class="boton text-lg">
+      <IconoWhatsapp tamano={22} />
+      {boton}
+    </button>
+    <p class="max-w-[30ch] text-sm text-gris">Se abre WhatsApp con el mensaje armado. Lo revisás y lo mandás vos.</p>
+  </div>
+  <p data-whatsapp-estado role="status" class="font-semibold empty:hidden"></p>
+</form>
+
+<script>
+  import "../scripts/formulario-whatsapp";
+</script>

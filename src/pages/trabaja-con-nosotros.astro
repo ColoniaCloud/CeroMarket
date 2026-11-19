@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import FormularioWhatsapp from "../components/FormularioWhatsapp.astro";
+import fotoEstanterias from "../assets/sitio/local-estanterias.jpg";
+---
+
+<Base titulo="Trabajá con nosotros" descripcion="Dejanos tus datos para sumarte al equipo de CERO Market cuando abramos nuevas oportunidades.">
+  <section class="contenedor pt-12 pb-20 lg:pt-16 lg:pb-28">
+    <h1 class="titular-cartel max-w-[10ch] text-[clamp(3.5rem,10vw,9rem)] uppercase">Trabajá con nosotros</h1>
+
+    <div class="mt-12 grid items-start gap-14 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-24">
+      <div>
+        <p class="max-w-[34ch] text-[clamp(1.4rem,2.4vw,1.9rem)] leading-snug font-semibold">
+          Cuando abramos nuevas oportunidades, te contactamos. Dejanos tus datos y contanos un poco sobre vos.
+        </p>
+        <Image
+          src={fotoEstanterias}
+          alt="Estanterías de madera del local"
+          widths={[480, 800]}
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          class="mt-12 hidden aspect-[4/3] w-full rounded-lg object-cover lg:block"
+        />
+      </div>
+      <div class="rounded-xl bg-niebla p-6 sm:p-10">
+        <FormularioWhatsapp
+          id="trabajo"
+          intro="Hola, me gustaría trabajar con CERO Market."
+          etiquetaMensaje="Contanos sobre vos"
+          boton="Enviar mis datos"
+        />
+      </div>
+    </div>
+  </section>
+</Base>

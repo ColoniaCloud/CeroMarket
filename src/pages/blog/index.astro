@@ -1,0 +1,16 @@
+---
+import Base from "../../layouts/Base.astro";
+import ListaPosts from "../../components/ListaPosts.astro";
+import { obtenerPosts } from "../../lib/posts";
+
+const posts = await obtenerPosts();
+---
+
+<Base titulo="Blog" descripcion="Notas, recetas e ideas para comprar y cocinar sin desperdicio.">
+  <ListaPosts
+    titulo="Blog"
+    bajada="Notas, recetas e ideas para comprar y cocinar sin desperdicio."
+    posts={posts}
+    vacio="Todavía no hay notas publicadas."
+  />
+</Base>

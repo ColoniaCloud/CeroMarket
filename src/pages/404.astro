@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base titulo="Página no encontrada">
+  <section class="contenedor flex flex-col items-start py-24 lg:py-36">
+    <span class="etiqueta-pizarra text-lg">404</span>
+    <h1 class="titular-cartel mt-6 max-w-[12ch] text-[clamp(3.5rem,10vw,9rem)] uppercase">Esta góndola está vacía</h1>
+    <p class="mt-8 max-w-[44ch] text-xl text-gris">
+      La página que buscás no existe o cambió de lugar. Probá por el catálogo o volvé al inicio.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+      <a href="/productos/" class="boton text-lg">Ver los productos</a>
+      <a href="/" class="enlace text-lg font-semibold">Ir al inicio</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,10 @@
+nombre: Almendras naturales
+marca: ""
+presentacion: ""
+categoria: frutos-secos
+descripcion: Almendras naturales, nutritivas y sin aditivos. Ideal para cualquier momento del día.
+imagen: ../../assets/productos/almendras-naturales/imagen.jpg
+galeria:
+  - ../../assets/productos/almendras-naturales/galeria-1.jpg
+destacado: false
+disponible: true

@@ -1,0 +1,11 @@
+---
+import Base from "../../layouts/Base.astro";
+import Catalogo from "../../components/Catalogo.astro";
+import { obtenerProductos } from "../../lib/productos";
+
+const productos = await obtenerProductos();
+---
+
+<Base titulo="Productos" descripcion="Especias, granos, frutos secos, café, cuidado personal y más, a granel y sin plásticos de un solo uso.">
+  <Catalogo productos={productos} />
+</Base>

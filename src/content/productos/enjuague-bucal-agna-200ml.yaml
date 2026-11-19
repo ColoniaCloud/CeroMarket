@@ -1,0 +1,10 @@
+nombre: Enjuague bucal
+marca: Agna
+presentacion: 200 ml
+categoria: cuidado-personal
+descripcion: ""
+imagen: ../../assets/productos/enjuague-bucal-agna-200ml/imagen.jpg
+galeria:
+  - ../../assets/productos/enjuague-bucal-agna-200ml/galeria-1.jpg
+destacado: false
+disponible: true

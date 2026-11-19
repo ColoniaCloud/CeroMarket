@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/sitio/logo-claro.png";
+import { ajustes, enlaceWhatsapp } from "../lib/ajustes";
+
+const telefono = `+${ajustes.whatsapp.slice(0, 3)} ${ajustes.whatsapp.slice(3, 5)} ${ajustes.whatsapp.slice(5, 8)} ${ajustes.whatsapp.slice(8)}`;
+
+const sitio = [
+  { href: "/productos/", texto: "Productos" },
+  { href: "/mision-zero-waste/", texto: "Misión zero waste" },
+  { href: "/sobre-nosotros/", texto: "Sobre nosotros" },
+  { href: "/contacto/", texto: "Contacto" },
+  { href: "/trabaja-con-nosotros/", texto: "Trabajá con nosotros" },
+];
+---
+
+<footer class="bg-pizarra text-blanco">
+  <div class="contenedor pt-16 pb-10 lg:pt-24">
+    <p class="titular-cartel max-w-[12ch] text-[clamp(3rem,9vw,7.5rem)] text-menta-clara uppercase">
+      Traé tus frascos.
+    </p>
+
+    <div class="mt-14 grid gap-10 border-t border-blanco/15 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+      <section aria-labelledby="pie-local">
+        <h2 id="pie-local" class="text-sm font-semibold text-menta-clara">El local</h2>
+        <address class="mt-3 not-italic">
+          {ajustes.direccion}
+          <br />
+          {ajustes.horario}
+        </address>
+        <a href={ajustes.mapa} target="_blank" rel="noopener" class="enlace mt-3 inline-block">Cómo llegar</a>
+      </section>
+
+      <section aria-labelledby="pie-contacto">
+        <h2 id="pie-contacto" class="text-sm font-semibold text-menta-clara">Contacto</h2>
+        <ul class="mt-3 space-y-1.5">
+          <li><a href={enlaceWhatsapp()} target="_blank" rel="noopener" class="enlace">WhatsApp {telefono}</a></li>
+          <li><a href={`mailto:${ajustes.email}`} class="enlace">{ajustes.email}</a></li>
+          <li><a href={ajustes.instagram} target="_blank" rel="noopener" class="enlace">Instagram</a></li>
+          <li><a href={ajustes.facebook} target="_blank" rel="noopener" class="enlace">Facebook</a></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="pie-envios">
+        <h2 id="pie-envios" class="text-sm font-semibold text-menta-clara">Envíos</h2>
+        <p class="mt-3 max-w-[32ch]">{ajustes.envios}</p>
+      </section>
+
+      <nav aria-labelledby="pie-sitio">
+        <h2 id="pie-sitio" class="text-sm font-semibold text-menta-clara">El sitio</h2>
+        <ul class="mt-3 space-y-1.5">
+          {sitio.map((enlace) => <li><a href={enlace.href} class="enlace">{enlace.texto}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="mt-16 flex flex-wrap items-end justify-between gap-6 text-sm text-blanco/70">
+      <Image src={logo} alt="CERO Market" width={150} densities={[1, 1.25]} class="h-auto w-[150px]" />
+      <p>© {new Date().getFullYear()} CERO Market · Montevideo, Uruguay</p>
+    </div>
+  </div>
+</footer>

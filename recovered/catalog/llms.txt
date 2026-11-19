@@ -1,0 +1,129 @@
+﻿# CeroMarket
+
+
+## Posts
+
+- [Descubre los beneficios del trigo sarraceno](https://api.ceromarket.com.uy/descubre-los-beneficios-del-trigo-sarraceno/): Descubre los beneficios del trigo sarraceno: una opción nutritiva y deliciosa para tu dieta.
+- [¡A cocinar con sabor tropical! Cómo usar la crema de coco 🥥](https://api.ceromarket.com.uy/a-cocinar-con-sabor-tropical-como-usar-la-crema-de-coco-%f0%9f%a5%a5/): Aprende a utilizar la deliciosa crema de coco en tus comidas y disfruta de un sabor tropical ¡en cada bocado! 🌴🍴
+- [Descubre las bayas de goji y sus beneficios](https://api.ceromarket.com.uy/descubre-las-bayas-de-goji-y-sus-beneficios/): Si estás buscando una forma de mejorar tu salud, ¡descubre las bayas de goji! Estos pequeños frutos rojos son una fuente increíble de antioxidantes y nutrientes que podrían ayudarte a sentirte mejor y tener más energía. Además, se pueden consumir de muchas formas diferentes, desde smoothies hasta ensaladas. ¡Atrévete a probarlas hoy mismo!
+- [Harina de arroz: ¡El secreto saludable para tus recetas!](https://api.ceromarket.com.uy/harina-de-arroz-el-secreto-saludable-para-tus-recetas/): ¡Descubre la harina de arroz, la alternativa perfecta para darle un toque saludable a tus recetas favoritas! Con su textura suave y su sabor delicioso, ¡no podrás resistirte a incluirla en tus platillos diarios! ¡Sigue leyendo para descubrir más sobre este secreto saludable!
+- [Beneficios de la mostaza negra en grano.](https://api.ceromarket.com.uy/mostaza-negra-en-grano/): La mostaza negra en grano es una especia con múltiples beneficios para la salud, gracias a su contenido de antioxidantes y compuestos antiinflamatorios. Además, es una excelente fuente de hierro, calcio y fibra dietética. En este artículo, exploraremos algunos de los beneficios de incluir la mostaza negra en grano en tu dieta diaria.
+- [Recetas y usos de la espinaca deshidratada](https://api.ceromarket.com.uy/recetas-y-usos-de-la-espinaca-deshidratada/): La espinaca deshidratada es un ingrediente cada vez más popular en la cocina. Se puede utilizar para preparar una variedad de platos, desde sopas y guisos hasta ensaladas y batidos. Además, es una excelente fuente de nutrientes como hierro, calcio y vitamina A. Siga leyendo para conocer algunos de los usos culinarios más populares de la espinaca deshidratada.
+- [¿Qué es el semolín y cuáles son sus usos en la cocina?](https://api.ceromarket.com.uy/que-es-el-semolin-y-cuales-son-sus-usos-en-la-cocina/): El semolín es un tipo de harina gruesa que se obtiene del trigo duro, un cereal que se caracteriza por su alto contenido en gluten y su resistencia a la cocción. El semolín se usa principalmente para elaborar pastas, como fideos, ravioles o ñoquis, ya que les aporta elasticidad y firmeza. Pero el semolín no solo sirve para hacer pastas. También tiene otros usos en la cocina que quizás no conozcas y que te pueden sorprender. Aquí te contamos algunos de ellos: Como ves, el semolín es un ingrediente muy versátil y práctico que puedes tener siempre en tu despensa. [&hellip;]
+- [Como reducir el uso de plasticos en la cocina](https://api.ceromarket.com.uy/como-reducir-el-uso-de-plasticos-en-la-cocina/): Reducir el uso de plásticos El plástico es un material muy presente en nuestra vida cotidiana, pero también es uno de los principales contaminantes del medio ambiente y de nuestra salud. Cada año se producen millones de toneladas de plástico que acaban en los océanos, los basurales o la atmósfera, afectando a la biodiversidad y al clima. Además, el plástico puede liberar sustancias tóxicas que se acumulan en nuestro organismo y pueden causar problemas hormonales, alérgicos o cancerígenos. La cocina es uno de los lugares donde más plástico usamos y desechamos, ya sea en forma de envases, utensilios o productos [&hellip;]
+- [Cous Cous con verduras y queso](https://api.ceromarket.com.uy/cous-cous-con-verduras-y-queso/): El cous cous es un alimento muy versátil que se puede combinar con diferentes ingredientes y sabores. Aquí te proponemos una receta de cous cous con verduras y queso feta, ideal para una comida ligera y nutritiva. Ingredientes para 4 personas: Preparación: Esperamos que disfrutes de esta receta, por favor cuéntanos en los comentarios como te ah quedado!
+- [Hongos Shitake: Origen y usos](https://api.ceromarket.com.uy/hongos-shitake-origen-y-usos/): Aprende sobre los hongos Shitake, descubre su origen y usos en la cocina!
+- [¿Qué es el psyllium husk y cómo cocinar con él?](https://api.ceromarket.com.uy/que-es-el-psyllium-husk-y-como-cocinar-con-el/): Conoces el psyllium husk? En este articulo te explicamos que es y cuales son sus usos. Ingrediente fundamental para celiacos y personas que consumen sin gluten. 
+
+## Pages
+
+- [Mi cuenta](https://api.ceromarket.com.uy/mi-cuenta/)
+- [Finalizar compra](https://api.ceromarket.com.uy/finalizar-compra/)
+- [Carrito](https://api.ceromarket.com.uy/carrito/)
+- [Tienda](https://api.ceromarket.com.uy/tienda/)
+
+## Products
+
+- [CHOCOLATE AMARGO 71% CACAO](https://api.ceromarket.com.uy/producto/chocolate-amargo-71-cacao/)
+- [CAFÉ ORGÁNICO CAMPO CLARO 90 GR](https://api.ceromarket.com.uy/producto/cafe-organico-campo-claro-90-gr/)
+- [ARROZ BASMATI](https://api.ceromarket.com.uy/producto/arroz-basmati/)
+- [Comino molido](https://api.ceromarket.com.uy/producto/comino-molido/): Aporta Riqueza y Profundidad a tus Recetas El condimento en polvo a base de comino es un ingrediente esencial para elevar el sabor de tus comidas. Este producto está cuidadosamente elaborado con comino de calidad premium, garantizando un perfil de sabor auténtico y consistente. Con cada pizca, podrás experimentar la textura delicada y el aroma distintivo que el comino aporta a tus platillos favoritos. Versátil Para Toda Cocina No importa si preparas recetas tradicionales, internacionales o creaciones originales, este condimento en polvo a base de comino es un complemento perfecto para una amplia variedad de platillos. Desde currys aromáticos y [&hellip;]
+- [Pimienta de cayena](https://api.ceromarket.com.uy/producto/pimienta-de-cayena/)
+- [Anís estrellado molido](https://api.ceromarket.com.uy/producto/anis-estrellado-molido/)
+- [Herbs de Provence](https://api.ceromarket.com.uy/producto/herbs-de-provence/)
+- [Clavo de olor molido](https://api.ceromarket.com.uy/producto/clavo-de-olor-molido/)
+- [Fenogreco](https://api.ceromarket.com.uy/producto/fenogreco/)
+- [Garam masala aromático](https://api.ceromarket.com.uy/producto/garam-masala-aromatico/)
+- [Harina de trigo orgánica 000](https://api.ceromarket.com.uy/producto/harina-de-trigo-organica-000/): La harina de trigo orgánica Campoclaro se produce a partir de trigos cosechados con el esfuerzo de productores orgánicos que practican un uso ecológicamente responsable de los recursos naturales.
+- [Castañas de Pará orgánicas 190 gr](https://api.ceromarket.com.uy/producto/castanas-de-para-organicas-190-gr/): Castañas de Pará o también llamadas Nuez de Brasil, son ricas en selenio y magnesio, poseen capacidad antioxidante. También contienen vitaminas del complejo B. y vitamina E.
+- [VITANNA Orujo de uva tannat 100 g](https://api.ceromarket.com.uy/producto/vitanna-orujo-de-uva-tannat-100-g/): VITANNA es un suplemento dietario natural. Contiene vitaminas y minerales. El Orujo de uvas tannat presenta vitaminas hidrosolubles ( ácido ascórbico, vitamina B1, B2, B3, B5 y B7 ), así como minerales ( potasio, sodio, calcio, magnesio). Su contenido en fibras es muy elevado comparado con el de otros productos integrales disponibles en el mercado, tiene un 50% de fibra dietaria. Es un antioxidante natural. Se recomienda tomar 2 cucharaditas diarias, mezcladas en jugos, licuados, yogur, cereales, leches, kéfir, o en la bebida que prefieras.
+- [VITANNA Orujo de uva tannat 350 g](https://api.ceromarket.com.uy/producto/vitanna-orujo-de-uva-tannat-350-g/): VITANNA es un suplemento dietario natural. Contiene vitaminas y minerales. El Orujo de uvas tannat presenta vitaminas hidrosolubles ( ácido ascórbico, vitamina B1, B2, B3, B5 y B7 ), así como minerales ( potasio, sodio, calcio, magnesio). Su contenido en fibras es muy elevado comparado con el de otros productos integrales disponibles en el mercado, tiene un 50% de fibra dietaria. Es un antioxidante natural. Se recomienda tomar 2 cucharaditas diarias, mezcladas en jugos, licuados, yogur, cereales, leches, kéfir, o en la bebida que prefieras.
+- [Nueces pecan](https://api.ceromarket.com.uy/producto/nueces-pecan/): Las nueces pecan son ricas en Omega 9, principalmente en ácido oleico, muy recomendable para prevenir las enfermedades cardiovasculares como la hipertensión, la trombosis o los problemas circulatorios. Previene el estreñimiento y mejora la capacidad cerebral.
+- [Espirulina en polvo](https://api.ceromarket.com.uy/producto/espirulina-en-polvo/): La espirulina en polvo en un suplemento alimenticio a base de alga rica en nutrientes esenciales para favorecer la salud y el bienestar general del organismo.
+- [Piñones](https://api.ceromarket.com.uy/producto/pinones/): Los piñones son semillas dulces y suaves, perfectas para cualquier receta.
+- [Bombonera (x6) - Frutos nativos](https://api.ceromarket.com.uy/producto/bombonera-x6-frutos-nativos/): Bombonera de 6 bombones de chocolate rellenos de arazá, butiá y guayabo. Esta caja muestra en su mejor expresión el sabor de cada uno de los frutos nativos. Cada bombón tiene un tamaño mayor al de un bombón tradicional para que sea consumido en dos bocados y así sentir el sabor, ver la textura y color de cada fruta. El empaque posee información sobre los frutos, dónde y cuando crecen, algunas de sus propiedades y características. Arazá, guayabo del país y butiá. Cada fruto marida con un tipo de chocolate diferente, todos de origen belga de alta calidad, ofreciendo así [&hellip;]
+- [Bombonera (x3) Frutos nativos](https://api.ceromarket.com.uy/producto/bombonera-x3-frutos-nativos/): Bombonera de 3 bombones de chocolate rellenos de arazá, butiá y guayabo. Esta caja muestra en su mejor expresión el sabor de cada uno de los frutos nativos. Cada bombón tiene un tamaño mayor al de un bombón tradicional para que sea consumido en dos bocados y así sentir el sabor, ver la textura y color de cada fruta. El empaque posee información sobre los frutos, dónde y cuando crecen, algunas de sus propiedades y características. Arazá, guayabo del país y butiá. Cada fruto marida con un tipo de chocolate diferente, todos de origen belga de alta calidad, ofreciendo así [&hellip;]
+- [YERBA SANTA NATIVA BOLSA TELA 1KG](https://api.ceromarket.com.uy/producto/yerba-santa-nativa-bolsa-tela-1kg/): La yerba Santa nativa es una yerba suave, agradable, de molienda gruesa y sin polvillo. Su producción es agroecológica, ya que es cosechada a mano por pequeños productores, secada sin horno, de manera natural y estacionada durante 12 meses. Las plantaciones de la yerba Santa se encuentran en el monte nativo, en un entorno natural y silvestre, por lo tanto no tiene tratamientos químicos. A continuación te contamos algunos de los beneficios de tomar mate. &#8211; Estimula el sistema nervioso y mejora el estado de ánimo, la concentración y la memoria, gracias a su contenido en cafeína y vitaminas del [&hellip;]
+- [Yerba Suave](https://api.ceromarket.com.uy/producto/yerba-suave/): Yerba mate suave y equilibrada, cultivada en Argentina con antioxidantes y vitaminas esenciales.
+- [Pimienta rosa en grano](https://api.ceromarket.com.uy/producto/pimienta-rosa-en-grano/): La pimienta rosa en grano, una especia aromática y suave con un toque de picor perfecta para carnes, ensaladas y salsas.
+- [PSYLLIUM HUSK](https://api.ceromarket.com.uy/producto/psyllium-husk/): El psyllium husk es la cáscara de las semillas de una planta llamada Plantago ovata. Es una fuente natural de fibra soluble que puede ayudar a regular el tránsito intestinal, prevenir el estreñimiento y reducir el colesterol. El psyllium husk se puede consumir en forma de polvo, cápsulas o tabletas, mezclado con agua u otros líquidos.
+- [Lecitina de soja granulada](https://api.ceromarket.com.uy/producto/lecitina-de-soja-granulada/): Suplemento natural de soja con múltiples beneficios para la salud, también utilizado como aditivo alimentario y en cosmética.
+- [Peine de madera](https://api.ceromarket.com.uy/producto/peine-de-madera/): Peine de madera natural para cuidado y belleza del cabello.
+- [Repelente "Tierra Pura"](https://api.ceromarket.com.uy/producto/repelente-tierra-pura/): El repelente Tierra Pura es natural y ecológico, efectivo contra insectos y mosquitos.
+- [Cepillo para ducha](https://api.ceromarket.com.uy/producto/cepillo-para-ducha/): Cepillo para ducha de madera y fibras naturales para exfoliar suavemente la piel durante el baño.
+- [Bálsamo labial](https://api.ceromarket.com.uy/producto/balsamo-labial/): Bálsamo labial natural hecho con 100% ingredientes naturales como aceite de coco, manteca de karité y ceras vegetales, para mantener tus labios hidratados y suaves todo el día.
+- [POROTO TAPE](https://api.ceromarket.com.uy/producto/poroto-tape/): El poroto tape es una legumbre originaria de África Occidental que se cultiva en diversas regiones de Asia y América. Se caracteriza por tener una semilla redondeada y beige con una mancha negra en el centro que recuerda a un ojo.    &nbsp;
+- [Almendras naturales](https://api.ceromarket.com.uy/producto/almendras-naturales/): Almendras naturales, nutritivas y sin aditivos. Ideal para cualquier momento del día.
+- [Anís estrellado entero](https://api.ceromarket.com.uy/producto/anis-estrellado-entero/): Anís estrellado entero para dar sabor a la cocina asiática y bebidas, con propiedades medicinales.
+- [Aceite de mostaza 250 ml](https://api.ceromarket.com.uy/producto/aceite-de-mostaza-250-ml/): El aceite de mostaza es un aceite vegetal que se obtiene de las semillas de la planta de mostaza. Tiene un color amarillo oscuro y un sabor picante y aromático.
+- [ACEITE DE LINO 250 ML](https://api.ceromarket.com.uy/producto/aceite-de-lino-250-ml/): Aceite de lino rico en ácidos grasos esenciales y lignanos que benefician el sistema cardiovascular y nervioso.
+- [Urad Dal](https://api.ceromarket.com.uy/producto/urad-dal/): El Urad Dal es una lenteja común en la cocina india, rico en proteínas y fibra. Se puede cocinar de varias formas.
+- [Harina de Espelta](https://api.ceromarket.com.uy/producto/harina-de-espelta/): Harina de espelta, rica en proteínas, fibra y vitaminas del grupo B, ideal para panes y repostería saludable.
+- [PASAS DE UVA PEQUEÑAS](https://api.ceromarket.com.uy/producto/pasas-de-uva-pequenas/)
+- [Avellanas peladas](https://api.ceromarket.com.uy/producto/avellanas-peladas/): Deliciosas avellanas peladas, ricas en proteínas, grasas saludables y fibra, ideales para picar entre comidas o añadir a ensaladas y postres.
+- [Cardamomo Molido](https://api.ceromarket.com.uy/producto/cardamomo-molido/): El Cardamomo Molido es una especia versátil y exótica con propiedades digestivas y antioxidantes, ideal para aromatizar postres, bebidas y platos salados.
+- [CARDAMOMO SEMILLAS](https://api.ceromarket.com.uy/producto/cardamomo-semillas/): El Cardamomo es una especia de sabor intenso, dulce y picante que se utiliza en la cocina para aromatizar postres, bebidas y platos salados. Procedente de la India, ésta semillas tiene propiedades digestivas, antiinflamatorias y antioxidantes. Su aroma es exótico y su sabor es versátil, ya que se puede utilizar en platos salados como currys, arroces y guisos, así como en postres y bebidas como el té chai y el café. Entre las propiedades del cardamomo, se destacan las siguientes: &#8211; Es un antiséptico natural que ayuda a eliminar las bacterias que causan el mal aliento y las caries. &#8211; [&hellip;]
+- [GALLETAS DE AVENA](https://api.ceromarket.com.uy/producto/galletas-de-avena/)
+- [BOLITAS DE ARROZ](https://api.ceromarket.com.uy/producto/bolitas-de-arroz/)
+- [TILO](https://api.ceromarket.com.uy/producto/tilo/)
+- [GELATINAS MIX](https://api.ceromarket.com.uy/producto/gelatinas-mix/)
+- [SHAM. SÓLIDO PALTA-HIBISCO-MAGNOLIA "NATURALMENTE"](https://api.ceromarket.com.uy/producto/sham-solido-palta-hibisco-magnolia-naturalmente/)
+- [SALSA MACHA  170 GR "APICIO"](https://api.ceromarket.com.uy/producto/salsa-macha-170-gr-apicio/): salsa elaborada a partir de maní, ajíes picantes secos, sésamo integral, sal y laurel. Probala en tacos o agregala en tus sopas.
+- [RECETA MIX DE LENTEJAS](https://api.ceromarket.com.uy/producto/receta-mix-de-lentejas/)
+- [RECETA MIX COUS COUS](https://api.ceromarket.com.uy/producto/receta-mix-cous-cous/)
+- [SEMOLIN](https://api.ceromarket.com.uy/producto/semolin/): El semolín es un tipo de harina gruesa que se obtiene de la molienda del trigo duro. Se utiliza para elaborar pastas, cuscús, gachas y otros platos. El semolín tiene un color amarillento y una textura granulada. Es rico en proteínas, carbohidratos y fibra, y tiene un sabor suave y ligeramente dulce.
+- [PEPINOS AGRIDULCES PIKELS  350ML/230GR ESC. "APICIO"](https://api.ceromarket.com.uy/producto/pepinos-agridulces-pikels-350ml-230gr-esc-apicio/)
+- [PERAS DESHIDRATADAS](https://api.ceromarket.com.uy/producto/peras-deshidratadas/)
+- [ENJUAGUE BUCAL "AGNA" 200ML](https://api.ceromarket.com.uy/producto/enjuague-bucal-agna-200ml/)
+- [POROTO MUNG](https://api.ceromarket.com.uy/producto/poroto-mung/)
+- [NUECES EN CUARTILLO](https://api.ceromarket.com.uy/producto/nueces-en-cuartillo/)
+- [MOSTACHA DIJON 160 GR "APICIO"](https://api.ceromarket.com.uy/producto/mostacha-dijon-160-gr-apicio/)
+- [MOSTACHA AMERICANA XL 320 GR "APICIO"](https://api.ceromarket.com.uy/producto/mostacha-americana-xl-320-gr-apicio/)
+- [MOSTACHA AMERICANA 160 GR "APICIO"](https://api.ceromarket.com.uy/producto/mostacha-americana-160-gr-apicio/)
+- [MIX FRUTOS SECOS SIN SAL](https://api.ceromarket.com.uy/producto/mix-frutos-secos-sin-sal/)
+- [MANZANILLA](https://api.ceromarket.com.uy/producto/manzanilla/)
+- [LIMPIADOR FACIAL "LINDURAS"](https://api.ceromarket.com.uy/producto/limpiador-facial-linduras/)
+- [AGUA MICELAR "AMMALUA" 100 ML](https://api.ceromarket.com.uy/producto/agua-micelar-ammalua-100-ml/)
+- [MASCARILLA FACIAL "AMMALUA" 50 ML](https://api.ceromarket.com.uy/producto/mascarilla-facial-ammalua-50-ml/)
+- [SERUM FACIAL 30 ML "SABIA"](https://api.ceromarket.com.uy/producto/serum-facial-30-ml-sabia/)
+- [HONGOS SHITAKE SECOS Y TROZADOS](https://api.ceromarket.com.uy/producto/hongos-shitake-secos-y-trozados/): Los hongos shitake son un tipo de seta originaria de Asia que se caracteriza por su sabor intenso y su textura carnosa. Se pueden consumir frescos o secos, y se utilizan en diversas recetas de cocina oriental y occidental. Los hongos shitake trozados son aquellos que se han cortado en pedazos pequeños, generalmente de forma irregular, para facilitar su cocción y su mezcla con otros ingredientes. Los hongos shitake trozados son una buena fuente de proteínas, fibra, vitaminas y minerales, y tienen propiedades beneficiosas para la salud.
+- [GRANOLA CHOCOLATE](https://api.ceromarket.com.uy/producto/granola-chocolate/)
+- [BOLDO](https://api.ceromarket.com.uy/producto/boldo/)
+- [GINGKO BILOBA](https://api.ceromarket.com.uy/producto/gingko-biloba/)
+- [GELATINA SIN SABOR](https://api.ceromarket.com.uy/producto/gelatina-sin-sabor/)
+- [FARIÑA DE MANDIOCA](https://api.ceromarket.com.uy/producto/farina-de-mandioca/)
+- [ENVOLTORIO ECOLOGICO MEDIANO](https://api.ceromarket.com.uy/producto/envoltorio-ecologico-mediano/)
+- [CONDIMENTO TIPO AZAFRAN](https://api.ceromarket.com.uy/producto/condimento-tipo-azafran/)
+- [COMINO ENTERO](https://api.ceromarket.com.uy/producto/comino-entero/)
+- [CIBOULETTE DESHIDRATADO](https://api.ceromarket.com.uy/producto/ciboulette-deshidratado/)
+- [CHOCOLATE SEMI AMARGO BELCOLADE 55% CACAO](https://api.ceromarket.com.uy/producto/chocolate-semi-amargo-belcolade-55-cacao/)
+- [CHOCOLATE AMARGO  96% CACAO](https://api.ceromarket.com.uy/producto/chocolate-amargo-96-cacao/)
+- [MERMELADA DE ZAPALLO GRANEL](https://api.ceromarket.com.uy/producto/mermelada-de-zapallo-granel/)
+- [MANZANA DESHIDRATADA EN CUBOS](https://api.ceromarket.com.uy/producto/manzana-deshidratada-en-cubos/)
+- [CREMA DE NUEZ PECAN 235g](https://api.ceromarket.com.uy/producto/crema-de-nuez-pecan-235g/)
+- [CREMA DE CAJÚ 235g "SAMADHI"](https://api.ceromarket.com.uy/producto/crema-de-caju-235g-samadhi/)
+- [CREMA DE ALMENDRAS 235g "SAMADHI"](https://api.ceromarket.com.uy/producto/crema-de-almendras-235g-samadhi/)
+- [CREMA DE HIBISCO Y ROSAS "AMBAR"](https://api.ceromarket.com.uy/producto/crema-de-hibisco-y-rosas-ambar/)
+- [CREMA DE MALVA "AMBAR"](https://api.ceromarket.com.uy/producto/crema-de-malva-ambar/)
+- [SERUM FACIAL "AMBAR"](https://api.ceromarket.com.uy/producto/serum-facial-ambar/)
+- [ROLL ON CONTORNO DE OJOS "AMBAR"](https://api.ceromarket.com.uy/producto/roll-on-contorno-de-ojos-ambar/)
+- [GEL DE LIMPIEZA FACIAL "AMBAR"](https://api.ceromarket.com.uy/producto/gel-de-limpieza-facial-ambar/)
+- [AGUA DE LIMPIEZA FACIAL "AMBAR"](https://api.ceromarket.com.uy/producto/agua-de-limpieza-facial-ambar/)
+- [BOLITAS DE CEREAL BAÑADAS](https://api.ceromarket.com.uy/producto/bolitas-de-cereal-banadas/)
+- [KOMBUCHA "BENDITA" 1lt](https://api.ceromarket.com.uy/producto/kombucha-bendita-1lt/)
+- [CAFE DESCAFEINADO GRANO](https://api.ceromarket.com.uy/producto/cafe-descafeinado-grano/)
+- [CAFE MOGGIANA GRANO](https://api.ceromarket.com.uy/producto/cafe-moggiana-grano/): Proveniente de la región de Mogiana (dividida entre los estados de São Paulo y Minas Gerais), ubicada en el municipio de Cássia dos Coqueiros, se hace lugar la Hacienda San Francisco (Fazenda São Francisco). Región de geografía ondulada e irregular. São Francisco es administrada por Fernando Sarreta en nombre de su familia, que estableció la finca por primera vez hace más de 40 años. Es una de las primeras fincas de la región en establecer prácticas orgánicas certificadas. Durante la cosecha, los granos de café flotan para eliminar el café menos denso y dañado, y luego se colocan en patios [&hellip;]
+- [CAFE ORGANICO GRANO](https://api.ceromarket.com.uy/producto/cafe-organico-grano/)
+- [CONDIMENTO PARA GUISO](https://api.ceromarket.com.uy/producto/condimento-para-guiso/)
+- [ENVOLTORIO ECOLOGICO CHICO](https://api.ceromarket.com.uy/producto/envoltorio-ecologico-chico/)
+- [ESTUCHE DE BAMBU PARA CEPILLO DE DIENTES MY ECO](https://api.ceromarket.com.uy/producto/estuche-de-bambu-para-cepillo-de-dientes-my-eco/)
+- [CILANTRO DESHIDRATADO HOJAS](https://api.ceromarket.com.uy/producto/cilantro-deshidratado-hojas/)
+- [Saquitos de Té](https://api.ceromarket.com.uy/producto/saquitos-de-te/)
+- [BASE PARA CEPILLO DE DIENTES MY ECO](https://api.ceromarket.com.uy/producto/base-para-cepillo-de-dientes-my-eco/)
+- [ALBAHACA TRITURADA DESHIDRATADA](https://api.ceromarket.com.uy/producto/albahaca-triturada-deshidratada/)
+- [ARROZ GRANO MEDIO](https://api.ceromarket.com.uy/producto/arroz-grano-medio/)
+- [ADOBO](https://api.ceromarket.com.uy/producto/adobo/)
+- [BOLSA TELA MARINERA 30cm x 30cm](https://api.ceromarket.com.uy/producto/bolsa-tela-marinera-30cm-x-30cm/)
+
+
+[comment]: # (Generated by Hostinger Tools Plugin)

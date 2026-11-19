@@ -1,0 +1,386 @@
+{
+  "_nota": "Generado a partir de las hojas de contacto (scripts/migracion/hojas-de-contacto.mjs). Rutas relativas a recovered/media. Ver docs/RECUPERACION-CATALOGO.md para el nivel de confianza de cada asignación.",
+  "productos": {
+    "agua-micelar-ammalua-100-ml": {
+      "imagen": "2025/08/080E46F5-2C14-4253-B1F3-545866F6CE98.jpg",
+      "galeria": []
+    },
+    "serum-facial-ambar": {
+      "imagen": "2025/08/08DD3BA6-2D36-44E1-8BB2-41E6F79DFCAF.jpg",
+      "galeria": []
+    },
+    "cardamomo-semillas": {
+      "imagen": "2025/08/0A16A7C3-E335-4599-9B97-4B4E895A4499.jpg",
+      "galeria": []
+    },
+    "almendras-naturales": {
+      "imagen": "2025/08/0A9710EF-8F94-4DC8-BE3F-476F97BC6018.jpg",
+      "galeria": [
+        "2025/08/50831991-1E6D-4274-A717-746E3F514300.jpg"
+      ]
+    },
+    "nueces-pecan": {
+      "imagen": "2025/08/1000077139-1.jpg",
+      "galeria": [
+        "2025/08/98789.png"
+      ]
+    },
+    "vitanna-orujo-de-uva-tannat-350-g": {
+      "imagen": "2025/08/1000084572-scaled-1.jpg",
+      "galeria": []
+    },
+    "vitanna-orujo-de-uva-tannat-100-g": {
+      "imagen": "2025/08/1000084574-scaled-1.jpg",
+      "galeria": []
+    },
+    "castanas-de-para-organicas-190-gr": {
+      "imagen": "2025/08/1000084575-scaled-1.jpg",
+      "galeria": []
+    },
+    "harina-de-trigo-organica-000": {
+      "imagen": "2025/08/1000084576-scaled-1.jpg",
+      "galeria": []
+    },
+    "cafe-organico-campo-claro-90-gr": {
+      "imagen": "2025/08/1000098318-scaled-1.jpg",
+      "galeria": []
+    },
+    "espirulina-en-polvo": {
+      "imagen": "2025/08/100962.png",
+      "galeria": []
+    },
+    "poroto-mung": {
+      "imagen": "2025/08/121547FC-FA05-441A-8E12-A8E04204FEB3.jpg",
+      "galeria": []
+    },
+    "anis-estrellado-entero": {
+      "imagen": "2025/08/1393D45C-4979-4196-99E2-6EBA9AB9E1BF.jpg",
+      "galeria": []
+    },
+    "nueces-en-cuartillo": {
+      "imagen": "2025/08/7F787ECE-AFCE-4AE2-8D7B-97966047DF7A.jpg",
+      "galeria": [
+        "2025/08/14D47CBC-1195-4239-8716-34C342338DD8.jpg"
+      ]
+    },
+    "mix-frutos-secos-sin-sal": {
+      "imagen": "2025/08/1A8A982A-142F-4F5E-9E8B-23FDC85024FD.jpg",
+      "galeria": [
+        "2025/08/A992C80D-0673-469A-9076-930C9AE957FA.jpg"
+      ]
+    },
+    "agua-de-limpieza-facial-ambar": {
+      "imagen": "2025/08/1C83608A-85AC-4E0A-8EBA-B9CC8523F87D.jpg",
+      "galeria": []
+    },
+    "tilo": {
+      "imagen": "2025/08/1CC25BCD-7E63-4772-BAF8-43F166FF456E.jpg",
+      "galeria": []
+    },
+    "repelente-tierra-pura": {
+      "imagen": "2025/08/2039B1A5-4CA8-4B76-BDD1-9277B9F8D586.jpg",
+      "galeria": []
+    },
+    "crema-de-hibisco-y-rosas-ambar": {
+      "imagen": "2025/08/20AEA6CB-9F0E-488C-AF1A-73492FC75BDB.jpg",
+      "galeria": []
+    },
+    "crema-de-malva-ambar": {
+      "imagen": "2025/08/A5A08F1B-DD23-48CA-931E-463389A69DC2.jpg",
+      "galeria": []
+    },
+    "gelatinas-mix": {
+      "imagen": "2025/08/20DBE450-7A05-4B14-9676-E4756ABEED00.jpg",
+      "galeria": []
+    },
+    "kombucha-bendita-1lt": {
+      "imagen": "2025/08/2197C5B0-140D-415A-9B00-8EDCEAB0C279.jpg",
+      "galeria": []
+    },
+    "hongos-shitake-secos-y-trozados": {
+      "imagen": "2025/08/22E2D0BB-3873-438D-B384-B3F55C96C64C.jpg",
+      "galeria": [
+        "2025/08/shitake.jpg"
+      ]
+    },
+    "poroto-tape": {
+      "imagen": "2025/08/24B0FB52-EC60-4BD0-BF7D-AAD5CC2AE29E.jpg",
+      "galeria": []
+    },
+    "gel-de-limpieza-facial-ambar": {
+      "imagen": "2025/08/2ECB0403-998B-4697-9896-ED26BE356172.jpg",
+      "galeria": []
+    },
+    "mostacha-americana-160-gr-apicio": {
+      "imagen": "2025/08/415A7446-F48D-4CAB-98DE-23DEB2275130.jpg",
+      "galeria": []
+    },
+    "mostacha-dijon-160-gr-apicio": {
+      "imagen": "2025/08/49D7B402-BB01-4C65-9830-7E29AF086E37.jpg",
+      "galeria": []
+    },
+    "aceite-de-lino-250-ml": {
+      "imagen": "2025/08/4AD39629-6DE9-4F5F-BFAA-6EB350E7F4AE.jpg",
+      "galeria": []
+    },
+    "enjuague-bucal-agna-200ml": {
+      "imagen": "2025/08/4FC1AE78-38C2-441F-B204-8BC4A0DFBEA6.jpg",
+      "galeria": [
+        "2025/08/AA05CF79-17DB-4B08-B361-6ED823DD9933.jpg"
+      ]
+    },
+    "receta-mix-de-lentejas": {
+      "imagen": "2025/08/540C60B4-67CB-4897-ADE2-75B2E30FD92A.jpg",
+      "galeria": []
+    },
+    "sham-solido-palta-hibisco-magnolia-naturalmente": {
+      "imagen": "2025/08/585E8610-66E0-4684-AD93-F47C3E45C842.jpg",
+      "galeria": []
+    },
+    "pimienta-rosa-en-grano": {
+      "imagen": "2025/08/67661F2F-79CA-44CC-92CD-6A1648AA765B.jpg",
+      "galeria": []
+    },
+    "balsamo-labial": {
+      "imagen": "2025/08/68419E50-187D-4959-A33D-E62B5938BF85.jpg",
+      "galeria": []
+    },
+    "crema-de-nuez-pecan-235g": {
+      "imagen": "2025/08/68F58073-A244-4690-94B2-D55FB7FEF5D5.jpg",
+      "galeria": []
+    },
+    "base-para-cepillo-de-dientes-my-eco": {
+      "imagen": "2025/08/D4A8CF60-4962-4903-8065-A4953F75E7A0.jpg",
+      "galeria": []
+    },
+    "yerba-santa-nativa-bolsa-tela-1kg": {
+      "imagen": "2025/08/88507.png",
+      "galeria": []
+    },
+    "receta-mix-cous-cous": {
+      "imagen": "2025/08/8866ABE3-6C11-42A1-B8F5-78096CB2B137.jpg",
+      "galeria": []
+    },
+    "pepinos-agridulces-pikels-350ml-230gr-esc-apicio": {
+      "imagen": "2025/08/8932F51B-E047-4FC8-ADC3-193BCD2170EC.jpg",
+      "galeria": []
+    },
+    "salsa-macha-170-gr-apicio": {
+      "imagen": "2025/08/928611CE-D830-4737-88F9-EAD02F4AED8E.jpg",
+      "galeria": []
+    },
+    "bombonera-x6-frutos-nativos": {
+      "imagen": "2025/08/95402.jpg",
+      "galeria": [
+        "2025/08/95408.png",
+        "2025/08/95407.jpg"
+      ]
+    },
+    "bombonera-x3-frutos-nativos": {
+      "imagen": "2025/08/95403.jpg",
+      "galeria": []
+    },
+    "pinones": {
+      "imagen": "2025/08/97731.png",
+      "galeria": []
+    },
+    "psyllium-husk": {
+      "imagen": "2025/08/9502BEFD-800A-47AC-AD88-7075F77A6E35.jpg",
+      "galeria": []
+    },
+    "pasas-de-uva-pequenas": {
+      "imagen": "2025/08/8E335DB2-920D-47CA-80AD-E1297C015E49.jpg",
+      "galeria": []
+    },
+    "peras-deshidratadas": {
+      "imagen": "2025/08/BB7F07CC-7F49-4D48-B568-8E41193DF24E.jpg",
+      "galeria": []
+    },
+    "estuche-de-bambu-para-cepillo-de-dientes-my-eco": {
+      "imagen": "2025/08/C09B298B-DF0A-4180-AC6B-4600D70F3E5D.jpg",
+      "galeria": []
+    },
+    "mascarilla-facial-ammalua-50-ml": {
+      "imagen": "2025/08/C0D1210C-F6B6-4658-BCD5-24515578A3B4.jpg",
+      "galeria": []
+    },
+    "aceite-de-mostaza-250-ml": {
+      "imagen": "2025/08/C892645D-CB25-4190-A3BA-B13A92B19542.jpg",
+      "galeria": []
+    },
+    "ciboulette-deshidratado": {
+      "imagen": "2025/08/CEB7ED0B-5213-4D20-9C2E-55998E135F4A.jpg",
+      "galeria": []
+    },
+    "urad-dal": {
+      "imagen": "2025/08/D574D46C-481A-4EA7-9FCA-34C628068BE9.jpg",
+      "galeria": []
+    },
+    "crema-de-caju-235g-samadhi": {
+      "imagen": "2025/08/DE78F5B2-FBB8-4C99-B8F9-D2F833A861F4.jpg",
+      "galeria": []
+    },
+    "crema-de-almendras-235g-samadhi": {
+      "imagen": "2025/08/F9A5EB5C-4145-439A-8FA6-60B53D36CC5A.jpg",
+      "galeria": []
+    },
+    "albahaca-triturada-deshidratada": {
+      "imagen": "2025/08/FC2F6F00-DD33-479B-839B-F344AF0A1079.jpg",
+      "galeria": []
+    },
+    "mermelada-de-zapallo-granel": {
+      "imagen": "2025/08/FD553273-4D03-4401-A84F-66B58D1903D4.jpg",
+      "galeria": []
+    },
+    "envoltorio-ecologico-mediano": {
+      "imagen": "2025/08/ecobee.jpg",
+      "galeria": []
+    },
+    "envoltorio-ecologico-chico": {
+      "imagen": "2025/08/15333873-D340-4EC4-9BC7-9F70993DAE55.jpg",
+      "galeria": [
+        "2025/08/39E11555-FCED-4EC1-82AC-C9108DA5CAC4.jpg"
+      ]
+    },
+    "peine-de-madera": {
+      "imagen": "2025/08/wp-1678403107650-scaled-1.jpg",
+      "galeria": []
+    },
+    "saquitos-de-te": {
+      "imagen": "2025/08/6E653A7B-C281-4FBE-AC04-D85364B7F81C.jpg",
+      "galeria": []
+    },
+    "bolsa-tela-marinera-30cm-x-30cm": {
+      "imagen": "2025/08/032D9CFB-616A-40FB-A023-9F3DE2DEB3F8.jpg",
+      "galeria": []
+    },
+    "cepillo-para-ducha": {
+      "imagen": "2025/08/32598554-8038-472F-B47A-81399CCB2EDD.jpg",
+      "galeria": []
+    },
+    "avellanas-peladas": {
+      "imagen": "2025/08/85CC32F3-EB9E-401E-A1CC-3482C86E53B6.jpg",
+      "galeria": []
+    },
+    "mostacha-americana-xl-320-gr-apicio": {
+      "imagen": "2025/08/DA2EA776-8B5E-43AA-B9E5-7B784C6F3655.jpg",
+      "galeria": []
+    },
+    "chocolate-semi-amargo-belcolade-55-cacao": {
+      "imagen": "2025/08/07C56BC4-D09F-45EA-8650-F91056153782.jpg",
+      "galeria": []
+    },
+    "chocolate-amargo-71-cacao": {
+      "imagen": "2025/08/605F9088-45A0-41CA-B3FA-8EC3355F71BC.jpg",
+      "galeria": []
+    },
+    "chocolate-amargo-96-cacao": {
+      "imagen": "2025/08/7C0FE8C2-9D92-42FC-A669-8E5DCFBCEBBE.jpg",
+      "galeria": []
+    },
+    "comino-entero": {
+      "imagen": "2025/08/42A5ACAF-1060-4C2F-AA1B-8037BC1C8D81.jpg",
+      "galeria": []
+    },
+    "clavo-de-olor-molido": {
+      "imagen": "2025/08/8DED4A48-E73C-49EA-8BA7-59DEB478A1E5.jpg",
+      "galeria": []
+    },
+    "arroz-basmati": {
+      "imagen": "2025/08/1000098309.jpg",
+      "galeria": []
+    },
+    "arroz-grano-medio": {
+      "imagen": "2025/08/522CB08F-B2BE-4E70-AF61-2E8C0735BB65.jpg",
+      "galeria": []
+    },
+    "bolitas-de-cereal-banadas": {
+      "imagen": "2025/08/561107E7-58F4-47D1-BC5F-3C8E3C3A14B6.jpg",
+      "galeria": []
+    },
+    "galletas-de-avena": {
+      "imagen": "2025/08/42665DC5-5C31-4485-9821-8D96449E52F7.jpg",
+      "galeria": []
+    },
+    "yerba-suave": {
+      "imagen": "2025/08/9A9C3EE6-B5E8-4E0C-8FF9-7083CB3F20E0.jpg",
+      "galeria": []
+    },
+    "manzanilla": {
+      "imagen": "2025/08/05936F2C-9CC2-484E-819F-6AA1749AA128.jpg",
+      "galeria": []
+    },
+    "pimienta-de-cayena": {
+      "imagen": "2025/08/98792.png",
+      "galeria": []
+    },
+    "condimento-para-guiso": {
+      "imagen": "2025/08/ED9588AA-C956-4EB3-92A7-F79CC81E9363.jpg",
+      "galeria": []
+    },
+    "gingko-biloba": {
+      "imagen": "2025/08/62187D17-F8F5-46EE-A08E-F24528E46852.jpg",
+      "galeria": []
+    },
+    "semolin": {
+      "imagen": "2025/08/276576DA-3CD0-45FD-A7A0-512EB838C41E.jpg",
+      "galeria": []
+    },
+    "manzana-deshidratada-en-cubos": {
+      "imagen": "2025/08/1000098301-scaled-1.jpg",
+      "galeria": []
+    },
+    "cafe-organico-grano": {
+      "imagen": "2025/08/pexels-photo-3914189.jpeg",
+      "galeria": []
+    },
+    "cafe-moggiana-grano": {
+      "imagen": "2025/08/pexels-igor-haritanovich-814387-1695052.jpg",
+      "galeria": []
+    },
+    "cafe-descafeinado-grano": {
+      "imagen": "2025/08/cafe.jpg",
+      "galeria": []
+    }
+  },
+  "posts": {
+    "descubre-los-beneficios-del-trigo-sarraceno": "2023/05/7CAD9B60-3CFF-422B-8A09-B8A8177D7B55-edited.jpg",
+    "a-cocinar-con-sabor-tropical-como-usar-la-crema-de-coco": "2023/05/crema_coco-scaled-1.jpg",
+    "descubre-las-bayas-de-goji-y-sus-beneficios": "2023/05/bayas-de-goji.webp",
+    "harina-de-arroz-el-secreto-saludable-para-tus-recetas": "2023/05/stashed-flour-used-cooking.jpg",
+    "mostaza-negra-en-grano": "2023/05/2536edb1-7e19-4d0a-9b30-cc59d7268c97._CR00970600_PT0_SX970__.jpg",
+    "recetas-y-usos-de-la-espinaca-deshidratada": "2023/05/ESPINACA-SANDWICH.jpg",
+    "que-es-el-semolin-y-cuales-son-sus-usos-en-la-cocina": "2023/03/semolin-de-trigo1-9044c052431ab2726716376721676333-480-0.jpg",
+    "como-reducir-el-uso-de-plasticos-en-la-cocina": "2023/03/cocina-cero-market-scaled-1.jpg",
+    "cous-cous-con-verduras-y-queso": "2023/03/pexels-mali-maeder-65171.jpg",
+    "hongos-shitake-origen-y-usos": "2023/03/set-dried-mushrooms-set-cast-iron-frying-pan-black-background_249006-15240.jpg",
+    "que-es-el-psyllium-husk-y-como-cocinar-con-el": "2023/03/psyllium.jpg"
+  },
+  "sitio": {
+    "local-gondolas.jpg": "2025/08/IMG_20231020_130104-scaled-1.jpg",
+    "local-pasillo.jpg": "2025/08/IMG_20231020_130419-scaled-1.jpg",
+    "local-estanterias.jpg": "2025/08/IMG_20220820_133737-scaled-1.jpg",
+    "recarga.jpg": "2025/08/2BFDC55F-3C06-478E-8EC8-FA44913E8FF4.jpg",
+    "frascos.jpg": "2025/08/4A64EB80-2A49-4696-B80F-579DA952E37E.jpg",
+    "frascos-repisa.jpg": "2025/08/011C8155-D4AE-4829-8388-3B47CCE6BE19.jpg",
+    "ilustracion-almendras.png": "2025/08/Group-15-1.png",
+    "ilustracion-frascos.jpg": "2025/08/89158741_GIU-AMA-211-07-scaled.jpg",
+    "logo-claro.png": "2025/08/logo.png",
+    "logo-oscuro.webp": "2025/08/logo-horizontal-oscuro.webp",
+    "logo-apilado-oscuro.png": "2025/08/logo-oscuro.png",
+    "logo-apilado-claro.png": "2025/08/logo-cero-market-2-1.png",
+    "icono-tierra.png": "2025/08/favicon-2-150x150-1.png",
+    "cafe-granos.jpg": "2025/08/pexels-igor-haritanovich-814387-1695052.jpg",
+    "desayuno.jpg": "2025/08/delicious-healthy-breakfast.jpg"
+  },
+  "destacados": [
+    "bombonera-x6-frutos-nativos",
+    "nueces-pecan",
+    "crema-de-nuez-pecan-235g",
+    "yerba-santa-nativa-bolsa-tela-1kg",
+    "pimienta-rosa-en-grano",
+    "vitanna-orujo-de-uva-tannat-350-g",
+    "anis-estrellado-entero",
+    "castanas-de-para-organicas-190-gr"
+  ]
+}

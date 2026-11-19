@@ -1,0 +1,10 @@
+nombre: Nueces en cuartillo
+marca: ""
+presentacion: ""
+categoria: frutos-secos
+descripcion: ""
+imagen: ../../assets/productos/nueces-en-cuartillo/imagen.jpg
+galeria:
+  - ../../assets/productos/nueces-en-cuartillo/galeria-1.jpg
+destacado: false
+disponible: true

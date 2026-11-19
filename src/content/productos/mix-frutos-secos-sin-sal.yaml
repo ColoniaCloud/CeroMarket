@@ -1,0 +1,10 @@
+nombre: Mix frutos secos sin sal
+marca: ""
+presentacion: ""
+categoria: frutos-secos
+descripcion: ""
+imagen: ../../assets/productos/mix-frutos-secos-sin-sal/imagen.jpg
+galeria:
+  - ../../assets/productos/mix-frutos-secos-sin-sal/galeria-1.jpg
+destacado: false
+disponible: true

@@ -1,0 +1,156 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import IconoWhatsapp from "../../components/IconoWhatsapp.astro";
+import TarjetaProducto from "../../components/TarjetaProducto.astro";
+import { ajustes, enlaceWhatsapp } from "../../lib/ajustes";
+import { nombreDeCategoria } from "../../lib/categorias";
+import {
+  mensajeDeConsulta,
+  obtenerProductos,
+  textoDeEtiqueta,
+  transicionDeFoto,
+  type Producto,
+} from "../../lib/productos";
+
+export const getStaticPaths = (async () => {
+  const productos = await obtenerProductos();
+  return productos.map((producto) => ({
+    params: { slug: producto.id },
+    props: {
+      producto,
+      // Primero los de la misma categoría con foto: la fila de abajo se ve mejor.
+      relacionados: productos
+        .filter((otro) => otro.data.categoria === producto.data.categoria && otro.id !== producto.id)
+        .sort((a, b) => Number(Boolean(b.data.imagen)) - Number(Boolean(a.data.imagen)))
+        .slice(0, 5),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  producto: Producto;
+  relacionados: Producto[];
+}
+
+const { producto, relacionados } = Astro.props;
+const { nombre, marca, descripcion, imagen, galeria, categoria, disponible } = producto.data;
+const etiqueta = textoDeEtiqueta(producto);
+const categoriaNombre = nombreDeCategoria(categoria);
+const consulta = disponible
+  ? mensajeDeConsulta(producto)
+  : `Hola, ¿me avisan cuando vuelva a entrar ${nombre}?`;
+
+const datosEstructurados = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: nombre,
+  description: descripcion || undefined,
+  brand: marca ? { "@type": "Brand", name: marca } : undefined,
+  category: categoriaNombre,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+
+<Base
+  titulo={marca ? `${nombre}, ${marca}` : nombre}
+  descripcion={descripcion || `${nombre} en CERO Market, supermercado a granel en Pocitos, Montevideo.`}
+  imagen={imagen ?? undefined}
+>
+  <script is:inline slot="cabeza" type="application/ld+json" set:html={JSON.stringify(datosEstructurados)} />
+
+  <article class="contenedor pt-6 pb-24 lg:pt-10">
+    <nav aria-label="Ruta" class="text-[0.95rem] text-gris">
+      <ol class="flex flex-wrap gap-x-2">
+        <li><a href="/productos/" class="enlace">Productos</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href={`/productos/${categoria}/`} class="enlace">{categoriaNombre}</a></li>
+      </ol>
+    </nav>
+
+    <div class="mt-6 grid gap-10 lg:mt-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-16">
+      <div>
+        <div class="aspect-square overflow-hidden rounded-lg bg-niebla">
+          {
+            imagen ? (
+              <Image
+                src={imagen}
+                alt={nombre}
+                widths={[480, 800, 1100]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="eager"
+                fetchpriority="high"
+                class="size-full object-cover"
+                style={transicionDeFoto(producto)}
+              />
+            ) : (
+              <div class="flex size-full items-center justify-center p-10 text-center" style={transicionDeFoto(producto)}>
+                <span class="font-tiza text-3xl leading-snug text-pizarra/75 sm:text-4xl">{nombre}</span>
+              </div>
+            )
+          }
+        </div>
+        {
+          galeria.length > 0 && (
+            <ul class="mt-4 grid grid-cols-3 gap-4">
+              {galeria.map((foto, indice) => (
+                <li class="aspect-square overflow-hidden rounded-md bg-niebla">
+                  <Image src={foto} alt={`${nombre}, foto ${indice + 2}`} widths={[240, 400]} sizes="(min-width: 1024px) 16vw, 31vw" class="size-full object-cover" />
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+
+      <div class="self-start lg:sticky lg:top-28">
+        {marca && <p class="text-lg font-medium text-gris">{marca}</p>}
+        <h1 class="titular-cartel mt-1 text-[clamp(2.75rem,6vw,5.25rem)] uppercase">{nombre}</h1>
+        {etiqueta && <p class="mt-5"><span class="etiqueta-pizarra text-base">{etiqueta}</span></p>}
+        {descripcion && <p class="mt-6 max-w-[52ch] text-lg">{descripcion}</p>}
+
+        {!disponible && <p class="mt-6 font-semibold">Sin stock por ahora.</p>}
+
+        <a href={enlaceWhatsapp(consulta)} target="_blank" rel="noopener" class="boton mt-8 w-full text-lg sm:w-auto">
+          <IconoWhatsapp tamano={22} />
+          {disponible ? "Consultar por WhatsApp" : "Avisame cuando vuelva"}
+        </a>
+
+        <dl class="mt-10 grid gap-6 border-t border-linea pt-8 sm:grid-cols-2">
+          <div>
+            <dt class="font-semibold">Retiro en el local</dt>
+            <dd class="mt-1 text-gris">
+              {ajustes.direccion}. {ajustes.horario}.
+              <a href={ajustes.mapa} target="_blank" rel="noopener" class="enlace mt-1 block text-pizarra">Cómo llegar</a>
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold">Envíos</dt>
+            <dd class="mt-1 text-gris">{ajustes.envios}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    {
+      relacionados.length > 0 && (
+        <section aria-labelledby="relacionados" class="mt-24 border-t border-linea pt-12">
+          <div class="flex flex-wrap items-baseline justify-between gap-4">
+            <h2 id="relacionados" class="titular-cartel text-[clamp(2rem,4vw,3.25rem)] uppercase">
+              Más en {categoriaNombre.toLowerCase()}
+            </h2>
+            <a href={`/productos/${categoria}/`} class="enlace font-medium">Ver toda la categoría</a>
+          </div>
+          <ul class="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5">
+            {relacionados.map((otro) => (
+              <li>
+                <TarjetaProducto producto={otro} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Base>

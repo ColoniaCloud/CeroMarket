@@ -1,0 +1,10 @@
+nombre: Nueces pecán
+marca: ""
+presentacion: ""
+categoria: frutos-secos
+descripcion: Las nueces pecan son ricas en Omega 9, principalmente en ácido oleico, muy recomendable para prevenir las enfermedades cardiovasculares como la hipertensión, la trombosis o los problemas circulatorios. Previene el estreñimiento y mejora la capacidad cerebral.
+imagen: ../../assets/productos/nueces-pecan/imagen.jpg
+galeria:
+  - ../../assets/productos/nueces-pecan/galeria-1.png
+destacado: true
+disponible: true

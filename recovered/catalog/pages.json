@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Mi cuenta",
+    "slug": "mi-cuenta",
+    "originalUrl": "https://api.ceromarket.com.uy/mi-cuenta/",
+    "description": "",
+    "descriptionTruncated": false
+  },
+  {
+    "name": "Finalizar compra",
+    "slug": "finalizar-compra",
+    "originalUrl": "https://api.ceromarket.com.uy/finalizar-compra/",
+    "description": "",
+    "descriptionTruncated": false
+  },
+  {
+    "name": "Carrito",
+    "slug": "carrito",
+    "originalUrl": "https://api.ceromarket.com.uy/carrito/",
+    "description": "",
+    "descriptionTruncated": false
+  },
+  {
+    "name": "Tienda",
+    "slug": "tienda",
+    "originalUrl": "https://api.ceromarket.com.uy/tienda/",
+    "description": "",
+    "descriptionTruncated": false
+  }
+]
