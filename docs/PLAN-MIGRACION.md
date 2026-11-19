@@ -82,12 +82,27 @@
   Chrome, Edge y Safari 18.2+; en Firefox se navega normal, sin animación.
 - Lectores de pantalla reales (se revisó estructura, etiquetas y foco).
 
+## Publicado
+
+El 2026-11-19 se publicó `dist/` en ceromarket.com.uy con `hosting_deploy`
+(estático). Reemplazó todo `public_html`: el frontend React viejo y la
+instalación de WordPress que quedaba en `public_html/api/`.
+
+- Antes de publicar se revisó `api/wp-content`: no había backups de base
+  (`wc-imports`, `wp-file-manager-pro/fm_backup` y `woocommerce_uploads`
+  estaban vacíos) y las fotos ya estaban en `recovered/media/`.
+- Se conservó `dry28d3bhk7auzzjjp0kt52yyg84sz.html` (en `public/`): es un
+  archivo de verificación de dominio, probablemente de Meta.
+- Verificado en producción: las 11 rutas principales responden 200, una
+  ruta inexistente da la página 404, `/productos` redirige a
+  `/productos/`, los archivos de `/_astro/` salen con caché de un año y no
+  hay imágenes rotas.
+
 ## Falta
 
 1. Resolver la lista de arriba (fotos, precios, posts, logo).
-2. **Deploy, con cuidado**: `hosting_deploy` pisa todo el contenido del
-   sitio, incluida la carpeta `public_html/api/`, que hoy es el único
-   respaldo en servidor de las imágenes originales. Ya están bajadas en
-   `recovered/media/`, pero confirmar antes de desplegar. Se publica el
-   contenido de `dist/`, que incluye `.htaccess` (página 404 y caché de
-   `/_astro/`).
+2. **Forzar HTTPS**: hoy `http://ceromarket.com.uy` responde 200 sin
+   redirigir. Activar "Forzar HTTPS" en la sección SSL del sitio en hPanel. No se
+   hizo en `.htaccess` porque el sitio está detrás del CDN de Hostinger y
+   una regla con `%{HTTPS}` puede entrar en bucle.
+3. Para volver a publicar: `npm run build` y desplegar `dist/` de nuevo.
