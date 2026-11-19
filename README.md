@@ -75,10 +75,19 @@ docs/             notas de la recuperación y de la migración
 
 ## Publicar
 
-`npm run build` y subir el contenido de `dist/` a `public_html`. Antes de
-publicar por primera vez, leer la advertencia de
-[`docs/PLAN-MIGRACION.md`](docs/PLAN-MIGRACION.md#falta): el deploy pisa
-todo lo que hay hoy en el hosting.
+Es automático: cada push a `main` publica el sitio en
+https://ceromarket.com.uy en un par de minutos.
+
+1. GitHub Actions ([`.github/workflows/publicar.yml`](.github/workflows/publicar.yml))
+   corre `npm run check` y `npm run build`.
+2. Si todo pasa, deja `dist/` en la rama `produccion`, que se reescribe
+   entera en cada publicación. No se edita a mano.
+3. Hostinger está conectado a la rama `produccion` (por la integración con
+   GitHub de hPanel) y la publica en cuanto cambia.
+
+Si el check o el build fallan, no se publica nada y el sitio queda como
+estaba; el error se ve en la pestaña Actions del repo. Para volver a
+publicar sin cambios, se puede correr el workflow a mano desde esa pestaña.
 
 ## Historia
 

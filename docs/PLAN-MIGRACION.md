@@ -105,4 +105,4 @@ instalación de WordPress que quedaba en `public_html/api/`.
    redirigir. Activar "Forzar HTTPS" en la sección SSL del sitio en hPanel. No se
    hizo en `.htaccess` porque el sitio está detrás del CDN de Hostinger y
    una regla con `%{HTTPS}` puede entrar en bucle.
-3. Para volver a publicar: `npm run build` y desplegar `dist/` de nuevo.
+3. Publicar ya es automático en cada push a `main` (ver README, "Publicar").
