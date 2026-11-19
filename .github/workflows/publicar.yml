@@ -27,8 +27,12 @@ jobs:
           node-version: 24
           cache: npm
 
+      # npm install y no npm ci: el lockfile se genera en Windows y npm no
+      # anota ahí algunas dependencias de paquetes opcionales de otras
+      # plataformas (@emnapi/* de los bindings wasm32). npm ci lo rechaza;
+      # npm install completa lo que falta y respeta el resto de versiones.
       - name: Instalar dependencias
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       # Si un producto o un post cargado en Keystatic no cumple el esquema,
       # se corta acá y el sitio publicado queda como estaba.
