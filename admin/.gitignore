@@ -1,0 +1,7 @@
+node_modules/
+.next/
+next-env.d.ts
+# Base SQLite e imágenes en desarrollo. En producción viven fuera de la app
+# (PAYLOAD_DATA_DIR): ver lib/datos.ts.
+data/
+.env

@@ -1,0 +1,31 @@
+{
+  "name": "ceromarket-admin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "payload generate:importmap && next dev --port 3100",
+    "build": "payload generate:importmap && payload migrate && next build --webpack",
+    "start": "payload migrate && next start",
+    "payload": "payload",
+    "tipos": "payload generate:types"
+  },
+  "dependencies": {
+    "@payloadcms/db-sqlite": "3.90.2",
+    "@payloadcms/next": "3.90.2",
+    "@payloadcms/richtext-lexical": "3.90.2",
+    "@payloadcms/translations": "3.90.2",
+    "next": "16.3.7",
+    "payload": "3.90.2",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "sharp": "^0.35.5",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "typescript": "^5"
+  }
+}

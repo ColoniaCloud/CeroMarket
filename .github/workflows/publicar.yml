@@ -1,12 +1,22 @@
 name: Publicar
 
-# Cada push a main revisa y compila el sitio, y deja el resultado (dist/) en
-# la rama "produccion". Hostinger está conectado a esa rama y la publica sola
-# en ceromarket.com.uy. La rama "produccion" no se toca a mano: se reescribe
+# Revisa y compila el sitio, y deja el resultado (dist/) en la rama
+# "produccion". Hostinger está conectado a esa rama y la publica sola en
+# ceromarket.com.uy. La rama "produccion" no se toca a mano: se reescribe
 # entera en cada publicación.
+#
+# Se dispara con:
+# - un push a main que toque el sitio (los cambios solo de admin/ no, porque
+#   el panel se publica aparte, en admin.ceromarket.com.uy);
+# - el panel, al guardar un producto, una nota o los datos del local
+#   (evento "contenido", ver admin/lib/publicar.ts);
+# - a mano, desde la pestaña Actions.
 on:
   push:
     branches: [main]
+    paths-ignore: ["admin/**"]
+  repository_dispatch:
+    types: [contenido]
   workflow_dispatch:
 
 permissions:
