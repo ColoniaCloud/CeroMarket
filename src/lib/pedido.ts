@@ -1,6 +1,13 @@
 // Pedido del cliente: vive en el navegador (localStorage) y no sale de su
 // dispositivo hasta que él mismo manda el mensaje por WhatsApp. Este módulo
 // corre solo en el navegador; el armado del mensaje es puro y no toca el DOM.
+import {
+  formatearCantidad,
+  normalizarGranel,
+  precioDeGranel,
+  type Unidad,
+  type Venta,
+} from "./granel";
 import { detalleDeProducto, formatearPrecio } from "./texto";
 
 export type Linea = { id: string; cantidad: number };
@@ -13,6 +20,8 @@ export type ProductoDelCatalogo = {
   presentacion: string;
   precio: number | null;
   disponible: boolean;
+  venta: Venta;
+  unidad: Unidad;
   url: string;
   imagen: string | null;
 };
@@ -21,6 +30,7 @@ export type Entrega = { nombre: string; modo: "retiro" | "envio"; direccion: str
 
 export type LineaCompleta = { producto: ProductoDelCatalogo; cantidad: number };
 
+// Máximo de unidades de un producto empaquetado; el granel tiene el suyo (en g o ml).
 export const CANTIDAD_MAXIMA = 99;
 export const EVENTO_CAMBIO = "pedido:cambio";
 const CLAVE = "cero-pedido";
@@ -54,10 +64,12 @@ const guardarPedido = (lineas: Linea[]) => {
   window.dispatchEvent(new CustomEvent(EVENTO_CAMBIO));
 };
 
-const acotar = (cantidad: number): number => Math.min(CANTIDAD_MAXIMA, Math.max(0, Math.round(cantidad)));
+const acotar = (cantidad: number, maximo: number): number => Math.min(maximo, Math.max(0, Math.round(cantidad)));
 
-export const cambiarCantidad = (id: string, cantidad: number) => {
-  const nueva = acotar(cantidad);
+// Para un producto a granel la cantidad va en gramos (o ml) y el máximo es
+// MAXIMO_GRANEL; para uno empaquetado son unidades.
+export const cambiarCantidad = (id: string, cantidad: number, maximo = CANTIDAD_MAXIMA) => {
+  const nueva = acotar(cantidad, maximo);
   const lineas = leerPedido();
   if (nueva === 0) return guardarPedido(lineas.filter((linea) => linea.id !== id));
   const existe = lineas.some((linea) => linea.id === id);
@@ -69,15 +81,16 @@ export const cambiarCantidad = (id: string, cantidad: number) => {
   );
 };
 
-export const agregarAlPedido = (id: string, cantidad = 1) => {
+export const agregarAlPedido = (id: string, cantidad = 1, maximo = CANTIDAD_MAXIMA) => {
   const actual = leerPedido().find((linea) => linea.id === id)?.cantidad ?? 0;
-  cambiarCantidad(id, actual + cantidad);
+  cambiarCantidad(id, actual + cantidad, maximo);
 };
 
 export const vaciarPedido = () => guardarPedido([]);
 
-export const contarUnidades = (lineas: Linea[] = leerPedido()): number =>
-  lineas.reduce((total, linea) => total + linea.cantidad, 0);
+// Cuántos productos distintos hay en el pedido (no se pueden sumar unidades
+// con gramos).
+export const contarProductos = (lineas: Linea[] = leerPedido()): number => lineas.length;
 
 // Avisa de cambios hechos en esta pestaña y en otras.
 export const escucharCambios = (alCambiar: () => void) => {
@@ -87,26 +100,52 @@ export const escucharCambios = (alCambiar: () => void) => {
   });
 };
 
+// Lo que cuesta una línea: por unidad, o por peso si es a granel.
+export const precioDeLinea = ({ producto, cantidad }: LineaCompleta): number | null => {
+  if (producto.precio == null) return null;
+  return producto.venta === "granel" ? precioDeGranel(producto.precio, cantidad) : producto.precio * cantidad;
+};
+
+// Una línea guardada antes de que el producto pasara a granel (o al revés)
+// puede traer una cantidad que ya no tiene sentido: se corrige acá.
+export const cantidadValida = (producto: ProductoDelCatalogo, cantidad: number): number =>
+  producto.venta === "granel" ? normalizarGranel(cantidad) : Math.min(CANTIDAD_MAXIMA, Math.max(1, cantidad));
+
+export const tieneGranel = (lineas: LineaCompleta[]): boolean =>
+  lineas.some(({ producto }) => producto.venta === "granel");
+
 export const totalConPrecio = (lineas: LineaCompleta[]): number =>
-  lineas.reduce((total, { producto, cantidad }) => total + (producto.precio ?? 0) * cantidad, 0);
+  lineas.reduce((total, linea) => total + (precioDeLinea(linea) ?? 0), 0);
 
 export const todasTienenPrecio = (lineas: LineaCompleta[]): boolean =>
   lineas.every(({ producto }) => producto.precio != null);
 
+// "250 g" para el granel, "2" para lo empaquetado.
+export const textoDeCantidad = ({ producto, cantidad }: LineaCompleta): string =>
+  producto.venta === "granel" ? formatearCantidad(cantidad, producto.unidad) : String(cantidad);
+
 // El mensaje que el cliente manda al local desde su propio WhatsApp, con
 // el formato de WhatsApp (*negrita*).
 export const armarMensaje = (lineas: LineaCompleta[], entrega: Entrega): string => {
-  const renglones = lineas.map(({ producto, cantidad }) => {
+  const renglones = lineas.map((linea) => {
+    const { producto, cantidad } = linea;
     const detalle = detalleDeProducto(producto.marca, producto.presentacion);
-    const precio = producto.precio == null ? "" : ` - ${formatearPrecio(producto.precio * cantidad)}`;
-    return `- ${cantidad} x ${producto.nombre}${detalle ? ` (${detalle})` : ""}${precio}`;
+    const importe = precioDeLinea(linea);
+    const precio = importe == null ? "" : ` - ${formatearPrecio(importe)}`;
+    const nombre = `${producto.nombre}${detalle ? ` (${detalle})` : ""}`;
+    return producto.venta === "granel"
+      ? `- ${formatearCantidad(cantidad, producto.unidad)} de ${nombre}${precio}`
+      : `- ${cantidad} x ${nombre}${precio}`;
   });
 
+  const estimado = tieneGranel(lineas);
   const conPrecio = lineas.filter(({ producto }) => producto.precio != null);
   let total = "¿Me confirman precios y disponibilidad?";
-  if (conPrecio.length === lineas.length) total = `*Total: ${formatearPrecio(totalConPrecio(lineas))}*`;
+  if (conPrecio.length === lineas.length)
+    total = `*Total${estimado ? " estimado" : ""}: ${formatearPrecio(totalConPrecio(lineas))}*`;
   else if (conPrecio.length > 0)
     total = `Subtotal de lo que tiene precio: ${formatearPrecio(totalConPrecio(conPrecio))}. El resto me lo confirman.`;
+  if (estimado) total += "\nLo que es a granel se pesa en el local: el importe puede variar un poco.";
 
   const datos = [
     `*Nombre:* ${entrega.nombre}`,

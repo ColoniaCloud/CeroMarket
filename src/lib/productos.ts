@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import { nombreDeCategoria } from "./categorias";
+import { nombreDeUnidad } from "./granel";
 import { detalleDeProducto, formatearPrecio, normalizar } from "./texto";
 
 export type Producto = CollectionEntry<"productos">;
@@ -18,7 +18,9 @@ export const transicionDeFoto = (producto: Producto): string => `view-transition
 // Lo que va escrito en la etiqueta pizarra. Los precios se perdieron con la
 // base vieja: si no hay precio ni presentación, no se muestra etiqueta.
 export const textoDeEtiqueta = (producto: Producto): string => {
-  const { presentacion, precio: valor } = producto.data;
+  const { presentacion, precio: valor, venta, unidad } = producto.data;
+  // A granel el precio es por kilo (o litro): "$ 1.290 el kilo".
+  if (venta === "granel") return valor == null ? "A granel" : `${formatearPrecio(valor)} el ${nombreDeUnidad(unidad)}`;
   const partes = [presentacion, valor == null ? "" : formatearPrecio(valor)].filter(Boolean);
   return partes.join(" · ");
 };
@@ -34,4 +36,4 @@ export const textoBuscable = (producto: Producto): string => {
   return normalizar([nombre, marca, presentacion].join(" "));
 };
 
-export const textoDeCategoria = (producto: Producto): string => normalizar(nombreDeCategoria(producto.data.categoria));
+export const textoDeCategoria = (producto: Producto): string => normalizar(producto.data.categoriaNombre);

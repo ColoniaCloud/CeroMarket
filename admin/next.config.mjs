@@ -2,6 +2,10 @@ import { withPayload } from "@payloadcms/next/withPayload";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // pdfjs-dist (lee la lista de precios) se carga desde node_modules en lugar
+  // de empaquetarse; su archivo de trabajo se importa en lib/lista/leerPdf.ts
+  // para que el build de producción lo incluya.
+  serverExternalPackages: ["pdfjs-dist"],
   turbopack: {
     root: process.cwd(),
   },

@@ -69,9 +69,11 @@ export interface Config {
   collections: {
     productos: Producto;
     categorias: Categoria;
+    importaciones: Importacione;
     posts: Post;
     medios: Medio;
     usuarios: Usuario;
+    ignorados: Ignorado;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,9 +83,11 @@ export interface Config {
   collectionsSelect: {
     productos: ProductosSelect<false> | ProductosSelect<true>;
     categorias: CategoriasSelect<false> | CategoriasSelect<true>;
+    importaciones: ImportacionesSelect<false> | ImportacionesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     medios: MediosSelect<false> | MediosSelect<true>;
     usuarios: UsuariosSelect<false> | UsuariosSelect<true>;
+    ignorados: IgnoradosSelect<false> | IgnoradosSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -140,21 +144,34 @@ export interface Producto {
   slug: string;
   marca?: string | null;
   /**
-   * Ej: 250 ml, 190 g, a granel.
+   * Ej: 250 ml, 190 g. En productos a granel va vacío.
    */
   presentacion?: string | null;
   categoria: number | Categoria;
   /**
-   * Si queda vacío, el sitio muestra «precio a confirmar» y el pedido lo consulta.
+   * A granel: es el precio por kilo (o por litro, según «El precio es por»). Si queda vacío, el sitio muestra «precio a confirmar».
    */
   precio?: number | null;
   descripcion?: string | null;
   imagen?: (number | null) | Medio;
   galeria?: (number | Medio)[] | null;
   /**
+   * A granel: la ficha pide los gramos (o ml) y calcula el precio.
+   */
+  venta: 'empaquetado' | 'granel';
+  unidadGranel?: ('kilo' | 'litro') | null;
+  /**
+   * Con este código la lista de precios mensual actualiza el precio de este producto.
+   */
+  codigo?: string | null;
+  /**
    * Destildado: se ve «sin stock» y no se puede agregar al pedido.
    */
   disponible?: boolean | null;
+  /**
+   * Destildado: el producto no aparece en el sitio.
+   */
+  publicado?: boolean | null;
   destacado?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -208,6 +225,47 @@ export interface Medio {
       filename?: string | null;
     };
   };
+}
+/**
+ * Subí el PDF «Listas de precios» del CRM. Se lee y se compara con el catálogo, pero no se cambia nada hasta que lo revisás y tocás «Aplicar».
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "importaciones".
+ */
+export interface Importacione {
+  id: number;
+  estado?: ('pendiente' | 'aplicando' | 'aplicada' | 'error') | null;
+  lista?: string | null;
+  progreso?: number | null;
+  analisis?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  resultado?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -275,6 +333,20 @@ export interface Usuario {
   collection: 'usuarios';
 }
 /**
+ * Artículos del CRM que la lista de precios no tiene que convertir en productos (envases, pruebas, insumos). Lo que se destilda al revisar una lista queda acá; borrando la fila vuelve a aparecer en la próxima.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ignorados".
+ */
+export interface Ignorado {
+  id: number;
+  codigo: string;
+  articulo?: string | null;
+  motivo?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -307,6 +379,10 @@ export interface PayloadLockedDocument {
         value: number | Categoria;
       } | null)
     | ({
+        relationTo: 'importaciones';
+        value: number | Importacione;
+      } | null)
+    | ({
         relationTo: 'posts';
         value: number | Post;
       } | null)
@@ -317,6 +393,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'usuarios';
         value: number | Usuario;
+      } | null)
+    | ({
+        relationTo: 'ignorados';
+        value: number | Ignorado;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -374,7 +454,11 @@ export interface ProductosSelect<T extends boolean = true> {
   descripcion?: T;
   imagen?: T;
   galeria?: T;
+  venta?: T;
+  unidadGranel?: T;
+  codigo?: T;
   disponible?: T;
+  publicado?: T;
   destacado?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -389,6 +473,28 @@ export interface CategoriasSelect<T extends boolean = true> {
   orden?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "importaciones_select".
+ */
+export interface ImportacionesSelect<T extends boolean = true> {
+  estado?: T;
+  lista?: T;
+  progreso?: T;
+  analisis?: T;
+  resultado?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -462,6 +568,17 @@ export interface UsuariosSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ignorados_select".
+ */
+export interface IgnoradosSelect<T extends boolean = true> {
+  codigo?: T;
+  articulo?: T;
+  motivo?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

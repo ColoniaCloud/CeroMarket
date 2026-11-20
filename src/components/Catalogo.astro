@@ -1,12 +1,12 @@
 ---
 import TarjetaProducto from "./TarjetaProducto.astro";
-import { CATEGORIAS, type CategoriaSlug } from "../lib/categorias";
+import { obtenerCategorias } from "../lib/categorias";
 import { enlaceWhatsapp } from "../lib/ajustes";
 import { textoBuscable, textoDeCategoria, type Producto } from "../lib/productos";
 
 interface Props {
   productos: Producto[];
-  categoria?: CategoriaSlug;
+  categoria?: string | undefined;
 }
 
 // Las páginas /productos y /productos/[categoria] renderizan TODO el
@@ -17,7 +17,7 @@ const { productos, categoria } = Astro.props;
 
 const filtros = [
   { slug: "", nombre: "Todo", href: "/productos/", total: productos.length },
-  ...CATEGORIAS.map(({ slug, nombre }) => ({
+  ...(await obtenerCategorias()).map(({ id: slug, data: { nombre } }) => ({
     slug,
     nombre,
     href: `/productos/${slug}/`,

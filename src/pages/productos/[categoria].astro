@@ -2,14 +2,17 @@
 import type { GetStaticPaths } from "astro";
 import Base from "../../layouts/Base.astro";
 import Catalogo from "../../components/Catalogo.astro";
-import { CATEGORIAS, type CategoriaSlug } from "../../lib/categorias";
+import { obtenerCategorias } from "../../lib/categorias";
 import { obtenerProductos } from "../../lib/productos";
 
-export const getStaticPaths = (() =>
-  CATEGORIAS.map(({ slug, nombre }) => ({ params: { categoria: slug }, props: { slug, nombre } }))) satisfies GetStaticPaths;
+export const getStaticPaths = (async () =>
+  (await obtenerCategorias()).map(({ id: slug, data: { nombre } }) => ({
+    params: { categoria: slug },
+    props: { slug, nombre },
+  }))) satisfies GetStaticPaths;
 
 interface Props {
-  slug: CategoriaSlug;
+  slug: string;
   nombre: string;
 }
 

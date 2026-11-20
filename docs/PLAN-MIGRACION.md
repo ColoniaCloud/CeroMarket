@@ -98,11 +98,54 @@ instalación de WordPress que quedaba en `public_html/api/`.
   `/productos/`, los archivos de `/_astro/` salen con caché de un año y no
   hay imágenes rotas.
 
+## Panel (2026-11-20)
+
+El contenido ya no se edita con Keystatic: pasó a un panel Payload en
+https://admin.ceromarket.com.uy (carpeta `admin/`, ver su README). La
+migración de contenido inicial cargó ahí los 100 productos, 9 categorías,
+11 posts (en borrador), las fotos y los datos del local. El sitio lee todo de
+la API del panel al compilar; los archivos que antes estaban en
+`src/content`, `src/data` y `src/assets/{productos,posts}` quedaron en
+`admin/semilla/` como fuente de esa carga inicial.
+
+Se verificó que el sitio compilado desde el panel es idéntico al publicado
+desde los archivos (texto, enlaces y textos alternativos de 7 páginas, 119
+páginas, 100 productos en `/catalogo.json`).
+
+## Lista de precios, granel y catálogo completo (2026-11-20)
+
+- **Panel con la marca** (menta, pizarra, Bricolage, logo y favicon).
+- **Productos**: código del CRM, venta (empaquetado o a granel, por kilo o por
+  litro), publicado.
+- **Granel en la web**: ficha con cantidades rápidas, campo libre, pasos de 50
+  y precio en vivo; tarjetas con cantidades rápidas; pedido y mensaje de
+  WhatsApp con gramos y total estimado.
+- **Importador del PDF «Listas de precios»** del CRM (ver `admin/README.md`):
+  lectura por posición (la extracción de texto simple desfasa las columnas y
+  da precios en el producto equivocado), análisis, pantalla de revisión y
+  aplicación en segundo plano. Probado con el PDF real de septiembre de 2026:
+  1.077 filas → 1.056 útiles, 2 conflictos de precio, 5 ignoradas (envases y
+  una prueba); 965 productos nuevos y 91 de la web vinculados; el flujo
+  mensual (misma lista otra vez, cambio de precio, producto que desaparece);
+  y el build standalone de producción.
+- **Catálogo de ~1.100 productos** en el sitio (buscador por palabras,
+  `content-visibility`, 90 KB comprimido, 1.087 páginas en ~1 minuto).
+- Publicar desde el panel usa el workflow «Publicar» (permiso Actions).
+
+Pendiente de la carga real (hacerla en el panel de producción):
+- Subir el PDF, **vincular a mano los ~50 productos de la web que no se
+  emparejan solos** y revisar categorías y granel de los nuevos.
+- ~950 productos nuevos salen **sin foto y sin descripción** (se publican con
+  nombre y precio); queda hacer la imagen de relleno.
+
 ## Falta
 
-1. Resolver la lista de arriba (fotos, precios, posts, logo).
+1. Resolver la lista de arriba (fotos, posts, logo en SVG).
 2. **Forzar HTTPS**: hoy `http://ceromarket.com.uy` responde 200 sin
    redirigir. Activar "Forzar HTTPS" en la sección SSL del sitio en hPanel. No se
    hizo en `.htaccess` porque el sitio está detrás del CDN de Hostinger y
    una regla con `%{HTTPS}` puede entrar en bucle.
-3. Publicar ya es automático en cada push a `main` (ver README, "Publicar").
+3. **`GITHUB_TOKEN_PUBLICAR`** en el panel, para que guardar republique el
+   sitio (ver `admin/README.md`).
+4. Imagen de relleno para los productos sin foto.
+5. Estadísticas de Search Console y Analytics en el panel (fase siguiente).

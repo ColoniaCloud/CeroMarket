@@ -1,15 +1,15 @@
-// Carga inicial: pasa a Payload el contenido que hasta ahora vivía en el repo
-// (src/content, src/data y src/assets del sitio Astro). Corre una sola vez,
-// como migración, en el primer build del panel en Hostinger: ahí el repo
-// completo está clonado al lado de admin/. Si ya hay productos, no hace nada.
+// Carga inicial: pasa a Payload el contenido que antes vivía en el repo del
+// sitio Astro y que ahora está en admin/semilla/ (YAML de productos, posts,
+// fotos y datos del local). Se corre con `npm run semilla` sobre una base
+// vacía; en producción ya corrió el 2026-11-20. Si ya hay productos, no hace nada.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { Payload, PayloadRequest } from "payload";
 import { parse } from "yaml";
 import { SIN_PUBLICAR } from "./publicar";
 
-// Copia de src/lib/categorias.ts al momento de migrar. De acá en adelante
-// las categorías se editan en el panel.
+// Las categorías que tenía el sitio al migrar. De acá en adelante se editan
+// en el panel.
 const CATEGORIAS = [
   { slug: "especias", nombre: "Especias y condimentos" },
   { slug: "granos", nombre: "Granos, harinas y legumbres" },
@@ -50,19 +50,19 @@ const leerFrontmatter = (texto: string): { datos: unknown; cuerpo: string } => {
   return { datos: parse(coincidencia[1] ?? ""), cuerpo: (coincidencia[2] ?? "").trim() };
 };
 
-export const cargarContenidoInicial = async (payload: Payload, req: PayloadRequest) => {
+export const cargarContenidoInicial = async (payload: Payload, req?: PayloadRequest) => {
   const { totalDocs } = await payload.count({ collection: "productos", req });
   if (totalDocs > 0) {
     payload.logger.info(`[semilla] Ya hay ${totalDocs} productos: no se carga nada.`);
     return;
   }
 
-  const raiz = path.resolve(process.cwd(), "..");
-  const carpetaProductos = path.join(raiz, "src/content/productos");
+  const raiz = path.join(process.cwd(), "semilla");
+  const carpetaProductos = path.join(raiz, "content/productos");
   // Mejor que el build falle a que la migración quede registrada como hecha
   // con el panel vacío: después no vuelve a correr sola.
   if (!existsSync(carpetaProductos)) {
-    throw new Error(`[semilla] No está ${carpetaProductos}: hace falta el repo completo para la carga inicial.`);
+    throw new Error(`[semilla] No está ${carpetaProductos}: hace falta admin/semilla para la carga inicial.`);
   }
 
   const contexto = { [SIN_PUBLICAR]: true };
@@ -111,6 +111,7 @@ export const cargarContenidoInicial = async (payload: Payload, req: PayloadReque
         descripcion: datos.descripcion || undefined,
         imagen,
         galeria,
+        venta: "empaquetado",
         destacado: datos.destacado ?? false,
         disponible: datos.disponible ?? true,
       },
@@ -119,7 +120,7 @@ export const cargarContenidoInicial = async (payload: Payload, req: PayloadReque
     });
   }
 
-  const carpetaPosts = path.join(raiz, "src/content/posts");
+  const carpetaPosts = path.join(raiz, "content/posts");
   const archivosPosts = existsSync(carpetaPosts)
     ? readdirSync(carpetaPosts).filter((nombre) => nombre.endsWith(".mdoc"))
     : [];
@@ -145,7 +146,7 @@ export const cargarContenidoInicial = async (payload: Payload, req: PayloadReque
     });
   }
 
-  const ajustes = path.join(raiz, "src/data/ajustes.json");
+  const ajustes = path.join(raiz, "ajustes.json");
   if (existsSync(ajustes)) {
     await payload.updateGlobal({
       slug: "ajustes",

@@ -4,14 +4,20 @@
 import {
   armarMensaje,
   cambiarCantidad,
+  cantidadValida,
+  CANTIDAD_MAXIMA,
   escucharCambios,
   leerPedido,
+  precioDeLinea,
+  tieneGranel,
   totalConPrecio,
+  textoDeCantidad,
   vaciarPedido,
   type Entrega,
   type LineaCompleta,
   type ProductoDelCatalogo,
 } from "../lib/pedido";
+import { MAXIMO_GRANEL, medidaDe, nombreDeUnidad, PASO_GRANEL } from "../lib/granel";
 import { detalleDeProducto, formatearPrecio } from "../lib/texto";
 
 const buscar = <T extends Element>(selector: string, raiz: ParentNode = document): T => {
@@ -44,17 +50,22 @@ const iniciarPedido = async (raiz: HTMLElement) => {
   }
   cargando.hidden = true;
 
+  // Un producto que se sacó del catálogo después de agregarlo se quita del
+  // pedido (y del contador de la cabecera).
+  for (const linea of leerPedido()) if (!catalogo.has(linea.id)) cambiarCantidad(linea.id, 0);
+
   // Un producto que se sacó del catálogo después de agregarlo no aparece.
   const lineasCompletas = (): LineaCompleta[] =>
     leerPedido().flatMap((linea) => {
       const producto = catalogo.get(linea.id);
-      return producto ? [{ producto, cantidad: linea.cantidad }] : [];
+      return producto ? [{ producto, cantidad: cantidadValida(producto, linea.cantidad) }] : [];
     });
 
   const textoDeTotal = (lineas: LineaCompleta[]): string => {
     const conPrecio = lineas.filter(({ producto }) => producto.precio != null);
     if (conPrecio.length === 0) return "Los precios te los confirmamos por WhatsApp.";
-    if (conPrecio.length === lineas.length) return `Total: ${formatearPrecio(totalConPrecio(lineas))}`;
+    const estimado = tieneGranel(lineas) ? " estimado" : "";
+    if (conPrecio.length === lineas.length) return `Total${estimado}: ${formatearPrecio(totalConPrecio(lineas))}`;
     return `Subtotal de lo que tiene precio: ${formatearPrecio(totalConPrecio(conPrecio))}. El resto te lo confirmamos.`;
   };
 
@@ -68,16 +79,24 @@ const iniciarPedido = async (raiz: HTMLElement) => {
       detalleDeProducto(producto.marca, producto.presentacion),
       producto.disponible ? "" : "Sin stock por ahora",
     ].filter(Boolean).join(" · ");
+    const granel = producto.venta === "granel";
+    const importe = precioDeLinea({ producto, cantidad });
     buscar<HTMLElement>("[data-precio]", fila).textContent =
-      producto.precio == null ? "Precio a confirmar" : `${formatearPrecio(producto.precio)} c/u`;
-    buscar<HTMLElement>("[data-cantidad]", fila).textContent = String(cantidad);
+      producto.precio == null
+        ? "Precio a confirmar"
+        : granel
+          ? `${formatearPrecio(producto.precio)} el ${nombreDeUnidad(producto.unidad)} · ${formatearPrecio(importe ?? 0)}`
+          : `${formatearPrecio(producto.precio)} c/u`;
+    buscar<HTMLElement>("[data-cantidad]", fila).textContent = textoDeCantidad({ producto, cantidad });
+    fila.dataset.granel = granel ? "si" : "no";
 
     const foto = buscar<HTMLImageElement>("[data-foto]", fila);
     if (producto.imagen) foto.src = producto.imagen;
     else foto.remove();
 
-    buscar<HTMLElement>("[data-menos]", fila).setAttribute("aria-label", `Uno menos de ${producto.nombre}`);
-    buscar<HTMLElement>("[data-mas]", fila).setAttribute("aria-label", `Uno más de ${producto.nombre}`);
+    const paso = granel ? `${PASO_GRANEL} ${medidaDe(producto.unidad)}` : "Uno";
+    buscar<HTMLElement>("[data-menos]", fila).setAttribute("aria-label", granel ? `${paso} menos de ${producto.nombre}` : `Uno menos de ${producto.nombre}`);
+    buscar<HTMLElement>("[data-mas]", fila).setAttribute("aria-label", granel ? `${paso} más de ${producto.nombre}` : `Uno más de ${producto.nombre}`);
     buscar<HTMLElement>("[data-quitar]", fila).setAttribute("aria-label", `Quitar ${producto.nombre} del pedido`);
     return fila;
   };
@@ -108,9 +127,15 @@ const iniciarPedido = async (raiz: HTMLElement) => {
     const boton = (evento.target as HTMLElement).closest<HTMLButtonElement>("button");
     const id = boton?.closest<HTMLElement>("li")?.dataset.id;
     if (!boton || !id) return;
-    const actual = leerPedido().find((linea) => linea.id === id)?.cantidad ?? 0;
-    if (boton.hasAttribute("data-mas")) cambiarCantidad(id, actual + 1);
-    else if (boton.hasAttribute("data-menos")) cambiarCantidad(id, Math.max(1, actual - 1));
+    const producto = catalogo.get(id);
+    if (!producto) return;
+    const granel = producto.venta === "granel";
+    const paso = granel ? PASO_GRANEL : 1;
+    const minimo = granel ? PASO_GRANEL : 1;
+    const maximo = granel ? MAXIMO_GRANEL : CANTIDAD_MAXIMA;
+    const actual = cantidadValida(producto, leerPedido().find((linea) => linea.id === id)?.cantidad ?? 0);
+    if (boton.hasAttribute("data-mas")) cambiarCantidad(id, actual + paso, maximo);
+    else if (boton.hasAttribute("data-menos")) cambiarCantidad(id, Math.max(minimo, actual - paso), maximo);
     else if (boton.hasAttribute("data-quitar")) cambiarCantidad(id, 0);
   });
 

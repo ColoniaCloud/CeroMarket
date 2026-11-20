@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { formatearCantidad, OPCIONES_RAPIDAS } from "../lib/granel";
 import {
   textoDeEtiqueta,
   transicionDeFoto,
@@ -14,7 +15,10 @@ interface Props {
 }
 
 const { producto, encabezado: Encabezado = "h3", carga = "lazy" } = Astro.props;
-const { nombre, marca, imagen, disponible } = producto.data;
+const { nombre, marca, imagen, disponible, venta, unidad } = producto.data;
+// A granel el botón abre cantidades rápidas (100 g, 250 g, ...); la cantidad
+// exacta se elige en la ficha o después en el pedido.
+const esGranel = venta === "granel";
 const etiqueta = textoDeEtiqueta(producto);
 ---
 
@@ -24,7 +28,9 @@ const etiqueta = textoDeEtiqueta(producto);
     {
       imagen ? (
         <Image
-          src={imagen}
+          src={imagen.src}
+          width={imagen.width}
+          height={imagen.height}
           alt=""
           widths={[300, 450, 640]}
           sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 23vw, (min-width: 640px) 31vw, 48vw"
@@ -45,7 +51,41 @@ const etiqueta = textoDeEtiqueta(producto);
   {etiqueta && <span class="etiqueta-pizarra mt-2">{etiqueta}</span>}
 </a>
 {
-  disponible && (
+  disponible && esGranel && (
+    <div class="mt-auto pt-3" data-granel-caja hidden>
+      <button
+        type="button"
+        data-granel-abrir
+        aria-expanded="false"
+        aria-label={`Elegir cantidad de ${nombre}`}
+        class="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-niebla px-4 text-[0.95rem] font-semibold transition-colors hover:bg-menta"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+        Agregar
+      </button>
+      <div data-granel-opciones hidden role="group" aria-label={`Cantidad de ${nombre}`} class="mt-2 flex flex-wrap gap-1.5">
+        {OPCIONES_RAPIDAS.map((cantidad) => (
+          <button
+            type="button"
+            data-agregar={producto.id}
+            data-nombre={nombre}
+            data-granel
+            data-unidad={unidad}
+            data-cantidad-fija={cantidad}
+            aria-label={`Agregar ${formatearCantidad(cantidad, unidad)} de ${nombre}`}
+            class="min-h-9 rounded-full border-2 border-pizarra px-3 text-sm font-semibold transition-colors hover:bg-pizarra hover:text-blanco"
+          >
+            {formatearCantidad(cantidad, unidad)}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+{
+  disponible && !esGranel && (
     <div class="mt-auto pt-3">
       <button
         type="button"

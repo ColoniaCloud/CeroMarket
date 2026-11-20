@@ -143,6 +143,15 @@
   .prosa img { border-radius: 0.5rem; }
 }
 
+/* Catálogo con más de mil productos: el navegador no dibuja las tarjetas que
+   están fuera de pantalla hasta que se acercan (content-visibility), así la
+   página sigue siendo ágil sin paginar. El tamaño estimado evita que la barra
+   de scroll salte. */
+[data-tarjeta] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 22rem;
+}
+
 /* Menú móvil: Popover API, sin JavaScript. */
 .menu-movil {
   inset: 0;

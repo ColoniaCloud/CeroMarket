@@ -3,9 +3,9 @@ import type { GetStaticPaths } from "astro";
 import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import IconoWhatsapp from "../../components/IconoWhatsapp.astro";
+import { MAXIMO_GRANEL, MINIMO_GRANEL, medidaDe, OPCIONES_RAPIDAS, PASO_GRANEL, formatearCantidad } from "../../lib/granel";
 import TarjetaProducto from "../../components/TarjetaProducto.astro";
 import { ajustes, enlaceWhatsapp } from "../../lib/ajustes";
-import { nombreDeCategoria } from "../../lib/categorias";
 import {
   mensajeDeConsulta,
   obtenerProductos,
@@ -35,9 +35,9 @@ interface Props {
 }
 
 const { producto, relacionados } = Astro.props;
-const { nombre, marca, descripcion, imagen, galeria, categoria, disponible } = producto.data;
+const { nombre, marca, descripcion, imagen, galeria, categoria, categoriaNombre, disponible, venta, unidad, precio } = producto.data;
+const esGranel = venta === "granel";
 const etiqueta = textoDeEtiqueta(producto);
-const categoriaNombre = nombreDeCategoria(categoria);
 const consulta = disponible
   ? mensajeDeConsulta(producto)
   : `Hola, ¿me avisan cuando vuelva a entrar ${nombre}?`;
@@ -75,7 +75,9 @@ const datosEstructurados = {
           {
             imagen ? (
               <Image
-                src={imagen}
+                src={imagen.src}
+                width={imagen.width}
+                height={imagen.height}
                 alt={nombre}
                 widths={[480, 800, 1100]}
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -96,7 +98,7 @@ const datosEstructurados = {
             <ul class="mt-4 grid grid-cols-3 gap-4">
               {galeria.map((foto, indice) => (
                 <li class="aspect-square overflow-hidden rounded-md bg-niebla">
-                  <Image src={foto} alt={`${nombre}, foto ${indice + 2}`} widths={[240, 400]} sizes="(min-width: 1024px) 16vw, 31vw" class="size-full object-cover" />
+                  <Image src={foto.src} width={foto.width} height={foto.height} alt={`${nombre}, foto ${indice + 2}`} widths={[240, 400]} sizes="(min-width: 1024px) 16vw, 31vw" class="size-full object-cover" />
                 </li>
               ))}
             </ul>
@@ -113,7 +115,57 @@ const datosEstructurados = {
         {!disponible && <p class="mt-6 font-semibold">Sin stock por ahora.</p>}
 
         {
-          disponible && (
+          disponible && esGranel && (
+            <div data-granel-ficha hidden data-unidad={unidad} data-precio={precio ?? ""} class="mt-8 max-w-md">
+              <p class="font-semibold">¿Cuánto querés?</p>
+              <div role="group" aria-label="Cantidades más pedidas" class="mt-3 flex flex-wrap gap-2">
+                {OPCIONES_RAPIDAS.map((cantidad) => (
+                  <button
+                    type="button"
+                    data-granel-opcion={cantidad}
+                    aria-pressed="false"
+                    class="min-h-11 rounded-full border-2 border-pizarra px-4 font-semibold transition-colors hover:bg-niebla aria-pressed:bg-pizarra aria-pressed:text-blanco"
+                  >
+                    {formatearCantidad(cantidad, unidad)}
+                  </button>
+                ))}
+              </div>
+              <div class="mt-3 flex h-12 w-fit items-center rounded-full border-2 border-pizarra">
+                <button type="button" data-granel-menos aria-label={`${PASO_GRANEL} ${medidaDe(unidad)} menos`} class="flex size-11 items-center justify-center rounded-full text-xl hover:bg-niebla">−</button>
+                <label for="cantidad-granel" class="sr-only">Cantidad en {medidaDe(unidad) === "ml" ? "mililitros" : "gramos"}</label>
+                <input
+                  id="cantidad-granel"
+                  data-granel-cantidad
+                  type="number"
+                  inputmode="numeric"
+                  min={MINIMO_GRANEL}
+                  max={MAXIMO_GRANEL}
+                  step={PASO_GRANEL}
+                  value="250"
+                  class="w-16 bg-transparent text-center text-lg font-semibold tabular-nums [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none"
+                />
+                <span aria-hidden="true" class="pr-1 text-sm text-gris">{medidaDe(unidad)}</span>
+                <button type="button" data-granel-mas aria-label={`${PASO_GRANEL} ${medidaDe(unidad)} más`} class="flex size-11 items-center justify-center rounded-full text-xl hover:bg-niebla">+</button>
+              </div>
+              <p data-granel-precio aria-live="polite" class="mt-4 text-2xl font-bold tabular-nums" />
+              <p class="mt-1 text-sm text-gris">
+                Se pesa en el local: el importe puede variar un poco.
+              </p>
+              <button
+                type="button"
+                data-agregar={producto.id}
+                data-nombre={nombre}
+                data-granel
+                data-unidad={unidad}
+                class="boton mt-5 w-full text-lg sm:w-auto"
+              >
+                <span data-agregar-texto>Agregar al pedido</span>
+              </button>
+            </div>
+          )
+        }
+        {
+          disponible && !esGranel && (
             <div data-agregar-caja hidden class="mt-8 flex flex-wrap items-center gap-3">
               <div class="flex h-12 items-center rounded-full border-2 border-pizarra">
                 <button type="button" data-restar aria-label="Uno menos" class="flex size-11 items-center justify-center rounded-full text-xl hover:bg-niebla">−</button>

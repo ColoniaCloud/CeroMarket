@@ -4,6 +4,8 @@ import { RootLayout, handleServerFunctions } from "@payloadcms/next/layouts";
 import config from "@payload-config";
 import { importMap } from "./admin/importMap.js";
 import "@payloadcms/next/css";
+import "@fontsource-variable/bricolage-grotesque";
+import "./custom.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://admin.ceromarket.com.uy"),

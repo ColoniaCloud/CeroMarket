@@ -31,22 +31,32 @@ const iniciarCatalogo = (raiz: HTMLElement) => {
   let categoria = raiz.dataset.categoria ?? "";
   let animacion: gsap.core.Timeline | undefined;
 
+  // Con más de mil productos solo se anima lo que está en pantalla (o cerca):
+  // animar todo sería lento y nadie lo ve.
+  const cercana = (tarjeta: HTMLElement): boolean => {
+    const caja = tarjeta.getBoundingClientRect();
+    return caja.bottom > -300 && caja.top < window.innerHeight + 300;
+  };
+
   const filtrar = () => {
-    const consulta = normalizar(buscador.value);
+    // Todas las palabras tienen que estar, en cualquier orden: "aceite coco"
+    // encuentra "Aceite de coco".
+    const palabras = normalizar(buscador.value).split(/\s+/).filter(Boolean);
+    const coincide = (texto: string | undefined): boolean => palabras.every((palabra) => (texto ?? "").includes(palabra));
     // Terminar la animación anterior antes de medir evita saltos al
     // escribir rápido o tocar varios filtros seguidos.
     animacion?.progress(1);
-    const estado = movimientoReducido.matches ? undefined : Flip.getState(tarjetas);
+    const visiblesAntes = tarjetas.filter((tarjeta) => !tarjeta.classList.contains("hidden"));
+    const animables = visiblesAntes.filter(cercana);
+    const estado = movimientoReducido.matches ? undefined : Flip.getState(animables);
 
     // Primero se busca en nombre, marca y presentación. Solo si nada
     // coincide se prueba con el nombre de la categoría ("especias", "té"):
     // así "café" no trae el boldo por estar en la misma góndola.
     const enCategoria = tarjetas.filter((tarjeta) => !categoria || tarjeta.dataset.categoria === categoria);
-    const porTexto = enCategoria.filter((tarjeta) => (tarjeta.dataset.texto ?? "").includes(consulta));
+    const porTexto = enCategoria.filter((tarjeta) => coincide(tarjeta.dataset.texto));
     const coincidencias = new Set(
-      porTexto.length > 0
-        ? porTexto
-        : enCategoria.filter((tarjeta) => (tarjeta.dataset.textoCategoria ?? "").includes(consulta)),
+      porTexto.length > 0 ? porTexto : enCategoria.filter((tarjeta) => coincide(tarjeta.dataset.textoCategoria)),
     );
 
     for (const tarjeta of tarjetas) tarjeta.classList.toggle("hidden", !coincidencias.has(tarjeta));
@@ -58,13 +68,18 @@ const iniciarCatalogo = (raiz: HTMLElement) => {
     vacioWhatsapp.href = `${whatsappBase}?text=${encodeURIComponent(`Hola, ¿tienen ${buscador.value.trim()}?`)}`;
 
     if (!estado) return;
+    const previas = new Set(visiblesAntes);
+    const nuevas = tarjetas.filter((tarjeta) => coincidencias.has(tarjeta) && !previas.has(tarjeta) && cercana(tarjeta));
     animacion = Flip.from(estado, {
       duration: 0.5,
       ease: "power3.inOut",
       absolute: true,
-      onEnter: (entran) => gsap.fromTo(entran, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.35, delay: 0.15 }),
       onLeave: (salen) => gsap.to(salen, { autoAlpha: 0, scale: 0.94, duration: 0.25 }),
     });
+    // Las que aparecen se muestran con un fundido, hasta un tope razonable.
+    if (nuevas.length > 0 && nuevas.length <= 60) {
+      gsap.fromTo(nuevas, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.35, delay: 0.15, clearProps: "opacity,visibility,transform" });
+    }
   };
 
   const elegirCategoria = (nueva: string) => {

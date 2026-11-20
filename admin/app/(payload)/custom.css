@@ -1,0 +1,83 @@
+/* Marca de CERO Market en el panel. Los estilos de Payload viven en una capa
+   de baja prioridad (@layer payload-default), así que lo que se redefine acá
+   gana sin necesidad de !important. Colores del sitio: pared menta, laminado
+   blanco y pizarra (ver ../../src/styles/global.css). */
+:root {
+  --cero-menta: #79cabd;
+  --cero-menta-clara: #a9e0d7;
+  --cero-menta-tinta: #2c6e64;
+  --cero-pizarra: #222426;
+  --cero-niebla: #eef2f1;
+
+  /* Escala de grises con un toque verdoso: de blanco (0) a pizarra (800) y de
+     ahí a casi negro. Payload arma fondos, bordes y botones con esta escala. */
+  --color-base-0: #ffffff;
+  --color-base-50: color-mix(in srgb, #1c2a27 5%, white);
+  --color-base-100: color-mix(in srgb, #1c2a27 9%, white);
+  --color-base-150: color-mix(in srgb, #1c2a27 14%, white);
+  --color-base-200: color-mix(in srgb, #1c2a27 20%, white);
+  --color-base-250: color-mix(in srgb, #1c2a27 26%, white);
+  --color-base-300: color-mix(in srgb, #1c2a27 32%, white);
+  --color-base-350: color-mix(in srgb, #1c2a27 38%, white);
+  --color-base-400: color-mix(in srgb, #1c2a27 44%, white);
+  --color-base-450: color-mix(in srgb, #1c2a27 50%, white);
+  --color-base-500: color-mix(in srgb, #1c2a27 56%, white);
+  --color-base-550: color-mix(in srgb, #1f2927 62%, white);
+  --color-base-600: color-mix(in srgb, #222426 70%, white);
+  --color-base-650: color-mix(in srgb, #222426 78%, white);
+  --color-base-700: color-mix(in srgb, #222426 86%, white);
+  --color-base-750: color-mix(in srgb, #222426 93%, white);
+  --color-base-800: #222426;
+  --color-base-850: #1b1d1f;
+  --color-base-900: #131516;
+  --color-base-950: #0b0c0d;
+  --color-base-1000: #000000;
+
+  /* "Éxito" (avisos, publicado, guardado) en la menta de la marca. */
+  --color-success-50: #eef7f5;
+  --color-success-100: #dcefeb;
+  --color-success-150: #c8e7e1;
+  --color-success-200: #a9e0d7;
+  --color-success-250: #94d6cb;
+  --color-success-300: #79cabd;
+  --color-success-350: #66bcae;
+  --color-success-400: #54ac9e;
+  --color-success-450: #429b8d;
+  --color-success-500: #378a7d;
+  --color-success-550: #2f7b70;
+  --color-success-600: #2c6e64;
+  --color-success-650: #285f57;
+  --color-success-700: #234f49;
+  --color-success-750: #1e4540;
+  --color-success-800: #193a36;
+  --color-success-850: #152f2c;
+  --color-success-900: #112624;
+  --color-success-950: #0d1c1b;
+
+  --font-body: "Bricolage Grotesque Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --style-radius-s: 6px;
+  --style-radius-m: 10px;
+  --style-radius-l: 16px;
+}
+
+/* Elementos activos y selección con la menta de la marca. */
+::selection {
+  background: var(--cero-menta);
+  color: var(--cero-pizarra);
+}
+
+/* Pantalla de ingreso: la pared menta del local. */
+.template-minimal {
+  background: var(--cero-menta);
+}
+.template-minimal .form-submit .btn {
+  width: 100%;
+}
+
+/* Títulos con el peso de la marca. */
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}

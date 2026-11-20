@@ -10,17 +10,19 @@ export const GET: APIRoute = async () => {
   const productos = await obtenerProductos();
   const catalogo: ProductoDelCatalogo[] = await Promise.all(
     productos.map(async (producto) => {
-      const { nombre, marca, presentacion, precio, disponible, imagen } = producto.data;
+      const { nombre, marca, presentacion, precio, disponible, imagen, venta, unidad } = producto.data;
       const miniatura = imagen
-        ? await getImage({ src: imagen, width: 144, height: 144, fit: "cover", format: "webp" })
+        ? await getImage({ src: imagen.src, width: 144, height: 144, fit: "cover", format: "webp" })
         : null;
       return {
         id: producto.id,
         nombre,
         marca,
         presentacion,
-        precio: precio ?? null,
+        precio,
         disponible,
+        venta,
+        unidad,
         url: urlDeProducto(producto),
         imagen: miniatura?.src ?? null,
       };

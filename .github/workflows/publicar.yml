@@ -8,15 +8,13 @@ name: Publicar
 # Se dispara con:
 # - un push a main que toque el sitio (los cambios solo de admin/ no, porque
 #   el panel se publica aparte, en admin.ceromarket.com.uy);
-# - el panel, al guardar un producto, una nota o los datos del local
-#   (evento "contenido", ver admin/lib/publicar.ts);
+# - el panel, al guardar un producto, una nota o los datos del local o al
+#   aplicar una lista de precios (ver admin/lib/publicar.ts);
 # - a mano, desde la pestaña Actions.
 on:
   push:
     branches: [main]
     paths-ignore: ["admin/**"]
-  repository_dispatch:
-    types: [contenido]
   workflow_dispatch:
 
 permissions:

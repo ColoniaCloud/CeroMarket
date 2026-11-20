@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { titulo, bajada, portada, tipo, borrador } = post.data;
+const { titulo, bajada, portada, tipo } = post.data;
 const fecha = fechaLegible(post);
 ---
 
@@ -16,7 +16,9 @@ const fecha = fechaLegible(post);
     {
       portada && (
         <Image
-          src={portada}
+          src={portada.src}
+          width={portada.width}
+          height={portada.height}
           alt=""
           widths={[400, 640, 900]}
           sizes="(min-width: 1024px) 31vw, (min-width: 640px) 48vw, 100vw"
@@ -28,7 +30,6 @@ const fecha = fechaLegible(post);
   <p class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gris">
     <span class="font-semibold text-pizarra">{tipo === "receta" ? "Receta" : "Nota"}</span>
     {fecha && <time datetime={post.data.fecha?.toISOString()}>{fecha}</time>}
-    {borrador && <span class="rounded-full bg-pizarra px-2 py-0.5 text-xs text-blanco">Borrador, no se publica</span>}
   </p>
   <h3 class="mt-1 text-xl leading-snug font-bold group-hover:underline decoration-menta decoration-2 underline-offset-4">{titulo}</h3>
   {bajada && <p class="mt-2 line-clamp-3 text-gris">{bajada}</p>}

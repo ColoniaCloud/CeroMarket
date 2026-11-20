@@ -1,3 +1,6 @@
+// HISTÓRICO: ya corrió. Su salida quedó en admin/semilla/ y de ahí la cargó
+// el panel (admin/lib/semilla.ts). Hoy el contenido se edita en el panel.
+//
 // Migración única: convierte el catálogo recuperado del WordPress caído
 // (recovered/catalog/*.json, ver docs/RECUPERACION-CATALOGO.md) en archivos de
 // contenido de Keystatic. Una vez que se edita contenido desde el panel, NO
