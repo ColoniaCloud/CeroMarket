@@ -1,0 +1,1 @@
+var e=e=>e.normalize(`NFD`).replace(/\p{Diacritic}/gu,``).toLowerCase().trim(),t=new Intl.NumberFormat(`es-UY`,{style:`currency`,currency:`UYU`,maximumFractionDigits:0}),n=e=>t.format(e),r=(e,t)=>[e,t].filter(Boolean).join(`, `);export{n,e as r,r as t};
