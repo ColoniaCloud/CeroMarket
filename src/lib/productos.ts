@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { nombreDeCategoria } from "./categorias";
-import { normalizar } from "./texto";
+import { detalleDeProducto, formatearPrecio, normalizar } from "./texto";
 
 export type Producto = CollectionEntry<"productos">;
 
@@ -15,23 +15,17 @@ export const urlDeProducto = (producto: Producto): string => `/producto/${produc
 // una página a la otra (View Transitions entre documentos).
 export const transicionDeFoto = (producto: Producto): string => `view-transition-name: foto-${producto.id}`;
 
-const precio = new Intl.NumberFormat("es-UY", {
-  style: "currency",
-  currency: "UYU",
-  maximumFractionDigits: 0,
-});
-
 // Lo que va escrito en la etiqueta pizarra. Los precios se perdieron con la
 // base vieja: si no hay precio ni presentación, no se muestra etiqueta.
 export const textoDeEtiqueta = (producto: Producto): string => {
   const { presentacion, precio: valor } = producto.data;
-  const partes = [presentacion, valor == null ? "" : precio.format(valor)].filter(Boolean);
+  const partes = [presentacion, valor == null ? "" : formatearPrecio(valor)].filter(Boolean);
   return partes.join(" · ");
 };
 
 export const mensajeDeConsulta = (producto: Producto): string => {
   const { nombre, marca, presentacion } = producto.data;
-  const detalle = [marca, presentacion].filter(Boolean).join(", ");
+  const detalle = detalleDeProducto(marca, presentacion);
   return `Hola, quiero consultar por ${nombre}${detalle ? ` (${detalle})` : ""}.`;
 };
 

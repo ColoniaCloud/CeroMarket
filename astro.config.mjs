@@ -13,7 +13,7 @@ const esDesarrollo = process.argv.includes("dev");
 
 export default defineConfig({
   site: "https://ceromarket.com.uy",
-  integrations: [react(), markdoc(), sitemap(), ...(esDesarrollo ? [keystatic()] : [])],
+  integrations: [react(), markdoc(), sitemap({ filter: (pagina) => !pagina.endsWith("/pedido/") }), ...(esDesarrollo ? [keystatic()] : [])],
   prefetch: { prefetchAll: true, defaultStrategy: "hover" },
   vite: { plugins: [tailwindcss()] },
 });

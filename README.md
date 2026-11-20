@@ -61,6 +61,23 @@ recovered/        respaldo de lo recuperado del sitio anterior (no se publica)
 docs/             notas de la recuperación y de la migración
 ```
 
+## Pedidos por WhatsApp
+
+No hay checkout ni pagos en la web. El cliente agrega productos (botón
+"Agregar" en las tarjetas y en la ficha) y en `/pedido` completa nombre,
+retiro o envío, dirección y notas. Al enviar, se abre WhatsApp en su
+teléfono con el pedido armado hacia el número del local: el mensaje sale
+desde el número del cliente.
+
+- El pedido se guarda solo en el navegador del cliente (`localStorage`); no
+  pasa por ningún servidor. Lógica en `src/lib/pedido.ts`, pantallas en
+  `src/scripts/pedido-global.ts` y `src/scripts/pedido.ts`.
+- `/catalogo.json` se genera en cada build con nombre, presentación, precio
+  y miniatura de cada producto. El pedido guardado tiene solo ids y
+  cantidades, así que un cambio de precio llega solo.
+- Si todos los productos tienen precio, el mensaje lleva el total; si no,
+  pide confirmar precios.
+
 ## Diseño y movimiento
 
 - Paleta y tipografía salen del local: pared menta, laminado blanco,

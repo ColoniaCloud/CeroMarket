@@ -52,5 +52,21 @@ const imagenSocial = await getImage({ src: imagen, width: 1200, height: 630, fit
       <slot />
     </main>
     <Pie />
+
+    <div
+      data-aviso
+      role="status"
+      aria-live="polite"
+      class="pointer-events-none invisible fixed inset-x-0 bottom-5 z-50 flex translate-y-4 justify-center px-4 opacity-0 transition duration-300 ease-salida data-[visible]:pointer-events-auto data-[visible]:visible data-[visible]:translate-y-0 data-[visible]:opacity-100"
+    >
+      <div class="flex max-w-full items-center gap-4 rounded-full bg-pizarra py-2.5 pr-2.5 pl-5 text-blanco shadow-xl">
+        <span data-aviso-texto class="min-w-0 truncate"></span>
+        <a href="/pedido/" class="shrink-0 rounded-full bg-menta px-4 py-2 text-sm font-semibold text-pizarra hover:bg-menta-clara">Ver pedido</a>
+      </div>
+    </div>
+
+    <script>
+      import "../scripts/pedido-global";
+    </script>
   </body>
 </html>

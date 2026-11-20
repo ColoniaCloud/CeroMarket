@@ -18,6 +18,7 @@ const { nombre, marca, imagen, disponible } = producto.data;
 const etiqueta = textoDeEtiqueta(producto);
 ---
 
+<div class="flex h-full flex-col">
 <a href={urlDeProducto(producto)} class="group block">
   <div class="relative aspect-square overflow-hidden rounded-md bg-niebla">
     {
@@ -43,3 +44,23 @@ const etiqueta = textoDeEtiqueta(producto);
   {marca && <p class="text-[0.95rem] text-gris">{marca}</p>}
   {etiqueta && <span class="etiqueta-pizarra mt-2">{etiqueta}</span>}
 </a>
+{
+  disponible && (
+    <div class="mt-auto pt-3">
+      <button
+        type="button"
+        hidden
+        data-agregar={producto.id}
+        data-nombre={nombre}
+        aria-label={`Agregar ${nombre} al pedido`}
+        class="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-niebla px-4 text-[0.95rem] font-semibold transition-colors hover:bg-menta"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+        <span data-agregar-texto>Agregar</span>
+      </button>
+    </div>
+  )
+}
+</div>

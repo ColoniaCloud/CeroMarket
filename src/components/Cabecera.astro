@@ -33,14 +33,14 @@ const whatsapp = enlaceWhatsapp("Hola, les escribo desde la web de CERO Market."
     </a>
 
     <nav aria-label="Principal" class="hidden lg:block">
-      <ul class="flex items-center gap-7 text-[0.95rem] font-medium">
+      <ul class="flex items-center gap-5 text-[0.95rem] font-medium xl:gap-7">
         {
           enlaces.map((enlace) => (
             <li>
               <a
                 href={enlace.href}
                 aria-current={estaActivo(enlace) ? "page" : undefined}
-                class="py-2 underline-offset-[0.45em] decoration-menta decoration-[3px] hover:underline aria-[current=page]:underline"
+                class="py-2 whitespace-nowrap underline-offset-[0.45em] decoration-menta decoration-[3px] hover:underline aria-[current=page]:underline"
               >
                 {enlace.texto}
               </a>
@@ -51,8 +51,22 @@ const whatsapp = enlaceWhatsapp("Hola, les escribo desde la web de CERO Market."
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href={whatsapp} target="_blank" rel="noopener" class="boton hidden min-h-11 py-2 text-[0.95rem] sm:inline-flex">
+      <a href={whatsapp} target="_blank" rel="noopener" class="boton hidden min-h-11 py-2 text-[0.95rem] sm:inline-flex lg:hidden xl:inline-flex">
         Hablemos
+      </a>
+      <a
+        href="/pedido/"
+        data-pedido-enlace
+        aria-label="Pedido"
+        aria-current={ruta.startsWith("/pedido") ? "page" : undefined}
+        class="flex h-11 items-center gap-2 rounded-full px-3 font-medium hover:bg-niebla aria-[current=page]:bg-niebla"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 8h12l-1 12H7L6 8Z"></path>
+          <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+        </svg>
+        <span class="hidden text-[0.95rem] md:inline" aria-hidden="true">Pedido</span>
+        <span data-pedido-cantidad hidden class="min-w-6 rounded-full bg-menta px-1.5 text-center text-sm leading-6 font-bold tabular-nums" aria-hidden="true">0</span>
       </a>
       <button
         type="button"

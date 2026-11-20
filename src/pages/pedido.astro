@@ -1,0 +1,126 @@
+---
+import Base from "../layouts/Base.astro";
+import IconoWhatsapp from "../components/IconoWhatsapp.astro";
+import { ajustes, enlaceWhatsapp } from "../lib/ajustes";
+
+// El pedido vive en el navegador del cliente: esta página se arma entera
+// con JavaScript (scripts/pedido.ts) a partir de lo guardado y de
+// /catalogo.json. No se indexa: no tiene contenido propio.
+---
+
+<Base titulo="Tu pedido" descripcion="Armá tu pedido y mandalo por WhatsApp a CERO Market.">
+  <meta slot="cabeza" name="robots" content="noindex" />
+
+  <section data-pedido data-whatsapp={ajustes.whatsapp} class="contenedor pt-10 pb-24 lg:pt-16">
+    <h1 class="titular-cartel text-[clamp(3rem,8vw,6.5rem)] uppercase">Tu pedido</h1>
+
+    <p data-pedido-cargando class="mt-8 text-gris">Cargando tu pedido…</p>
+
+    <noscript>
+      <div class="mt-10 max-w-2xl rounded-xl bg-niebla p-8">
+        <p class="text-xl font-semibold">Para armar el pedido en la web hace falta JavaScript.</p>
+        <p class="mt-2 text-gris">Igual podés pedir directo por WhatsApp.</p>
+        <a href={enlaceWhatsapp("¡Hola! Quiero hacer un pedido.")} class="boton mt-6">Pedir por WhatsApp</a>
+      </div>
+    </noscript>
+
+    <div data-pedido-vacio hidden tabindex="-1" class="mt-10 max-w-2xl rounded-xl bg-niebla p-8 sm:p-10">
+      <p data-pedido-vacio-titulo class="text-xl font-semibold">Tu pedido está vacío.</p>
+      <p data-pedido-vacio-texto class="mt-2 text-gris">Agregá productos desde el catálogo y mandanos el pedido por WhatsApp.</p>
+      <a href="/productos/" class="boton mt-8">Ver los productos</a>
+    </div>
+
+    <div data-pedido-contenido hidden class="mt-10 grid items-start gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
+      <div>
+        <ul data-pedido-lineas class="border-t border-linea"></ul>
+        <p data-pedido-total class="mt-6 text-lg"></p>
+        <a href="/productos/" class="enlace mt-6 inline-block font-medium">Seguir agregando productos</a>
+      </div>
+
+      <form data-pedido-form class="rounded-xl bg-niebla p-6 sm:p-10 lg:sticky lg:top-28" novalidate>
+        <h2 class="text-2xl font-bold">Tus datos</h2>
+
+        <div class="mt-6">
+          <label for="pedido-nombre" class="block font-semibold">Nombre</label>
+          <input id="pedido-nombre" name="nombre" required autocomplete="name" class="campo mt-2" />
+        </div>
+
+        <fieldset class="mt-6">
+          <legend class="font-semibold">Entrega</legend>
+          <div class="mt-2 grid gap-2">
+            <label class="flex cursor-pointer gap-3 rounded-lg border-2 border-linea bg-blanco p-4 has-[:checked]:border-pizarra">
+              <input type="radio" name="modo" value="retiro" checked class="mt-1 size-4 accent-pizarra" />
+              <span>
+                <span class="block font-semibold">Retiro en el local</span>
+                <span class="block text-sm text-gris">{ajustes.direccion}. {ajustes.horario}.</span>
+              </span>
+            </label>
+            <label class="flex cursor-pointer gap-3 rounded-lg border-2 border-linea bg-blanco p-4 has-[:checked]:border-pizarra">
+              <input type="radio" name="modo" value="envio" class="mt-1 size-4 accent-pizarra" />
+              <span>
+                <span class="block font-semibold">Envío a domicilio</span>
+                <span class="block text-sm text-gris">{ajustes.envios}</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div data-campo-direccion hidden class="mt-6">
+          <label for="pedido-direccion" class="block font-semibold">Dirección de entrega</label>
+          <input id="pedido-direccion" name="direccion" autocomplete="street-address" class="campo mt-2" />
+        </div>
+
+        <div class="mt-6">
+          <label for="pedido-notas" class="block font-semibold">Notas <span class="font-normal text-gris">(opcional)</span></label>
+          <textarea id="pedido-notas" name="notas" rows="3" class="campo mt-2 resize-y" aria-describedby="pedido-notas-ayuda"></textarea>
+          <p id="pedido-notas-ayuda" class="mt-1.5 text-sm text-gris">Para productos a granel, indicá cuántos gramos querés.</p>
+        </div>
+
+        <p data-pedido-error role="alert" class="mt-6 font-semibold text-[#9b1c1c] empty:hidden"></p>
+
+        <button type="submit" class="boton mt-8 w-full text-lg">
+          <IconoWhatsapp tamano={22} />
+          Enviar pedido por WhatsApp
+        </button>
+        <p class="mt-3 text-sm text-gris">
+          Se abre WhatsApp con el pedido armado. Lo revisás y lo mandás vos, así nos llega desde tu número.
+        </p>
+
+        <div data-pedido-enviado hidden class="mt-6 rounded-lg bg-blanco p-5">
+          <p class="font-semibold" role="status">Listo: se abrió WhatsApp con tu pedido.</p>
+          <p class="mt-1 text-sm text-gris">Cuando lo hayas enviado, podés vaciar el pedido de la web.</p>
+          <button type="button" data-pedido-vaciar class="boton boton-borde mt-4">Ya lo envié: vaciar pedido</button>
+        </div>
+      </form>
+    </div>
+
+    <template data-plantilla-linea>
+      <li class="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-4 gap-y-3 border-b border-linea py-5 sm:grid-cols-[4.5rem_minmax(0,1fr)_auto] sm:items-center">
+        <a data-enlace class="block size-18 overflow-hidden rounded-md bg-niebla" tabindex="-1" aria-hidden="true">
+          <img data-foto alt="" width="72" height="72" loading="lazy" class="size-full object-cover" />
+        </a>
+        <div class="min-w-0">
+          <a data-enlace data-nombre class="font-semibold hover:underline"></a>
+          <p data-detalle class="text-sm text-gris"></p>
+          <p data-precio class="mt-1 text-sm"></p>
+        </div>
+        <div class="col-start-2 flex items-center gap-2 sm:col-start-auto">
+          <div class="flex h-11 items-center rounded-full border-2 border-linea bg-blanco">
+            <button type="button" data-menos class="flex size-10 items-center justify-center rounded-full text-lg hover:bg-niebla">−</button>
+            <span data-cantidad class="w-8 text-center font-semibold tabular-nums"></span>
+            <button type="button" data-mas class="flex size-10 items-center justify-center rounded-full text-lg hover:bg-niebla">+</button>
+          </div>
+          <button type="button" data-quitar class="flex size-11 items-center justify-center rounded-full text-gris hover:bg-niebla hover:text-pizarra">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M5 7h14M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path>
+            </svg>
+          </button>
+        </div>
+      </li>
+    </template>
+  </section>
+</Base>
+
+<script>
+  import "../scripts/pedido";
+</script>

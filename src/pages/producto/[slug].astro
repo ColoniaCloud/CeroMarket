@@ -112,7 +112,28 @@ const datosEstructurados = {
 
         {!disponible && <p class="mt-6 font-semibold">Sin stock por ahora.</p>}
 
-        <a href={enlaceWhatsapp(consulta)} target="_blank" rel="noopener" class="boton mt-8 w-full text-lg sm:w-auto">
+        {
+          disponible && (
+            <div data-agregar-caja hidden class="mt-8 flex flex-wrap items-center gap-3">
+              <div class="flex h-12 items-center rounded-full border-2 border-pizarra">
+                <button type="button" data-restar aria-label="Uno menos" class="flex size-11 items-center justify-center rounded-full text-xl hover:bg-niebla">−</button>
+                <label for="cantidad" class="sr-only">Cantidad</label>
+                <input id="cantidad" data-cantidad type="number" inputmode="numeric" min="1" max="99" value="1" class="w-10 bg-transparent text-center text-lg font-semibold tabular-nums [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none" />
+                <button type="button" data-sumar aria-label="Uno más" class="flex size-11 items-center justify-center rounded-full text-xl hover:bg-niebla">+</button>
+              </div>
+              <button type="button" data-agregar={producto.id} data-nombre={nombre} class="boton grow text-lg sm:grow-0">
+                <span data-agregar-texto>Agregar al pedido</span>
+              </button>
+            </div>
+          )
+        }
+
+        <a
+          href={enlaceWhatsapp(consulta)}
+          target="_blank"
+          rel="noopener"
+          class:list={["boton w-full text-lg sm:w-auto", disponible ? "boton-borde mt-3" : "mt-8"]}
+        >
           <IconoWhatsapp tamano={22} />
           {disponible ? "Consultar por WhatsApp" : "Avisame cuando vuelva"}
         </a>
