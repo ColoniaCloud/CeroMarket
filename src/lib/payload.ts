@@ -16,6 +16,18 @@ export const pedirAlPanel = async <T>(ruta: string): Promise<T> => {
   return (await respuesta.json()) as T;
 };
 
+// Para lo que un panel todavía sin actualizar puede no tener (por ejemplo la
+// colección de reseñas, mientras Hostinger termina de publicar el panel nuevo):
+// un 404 es "no hay" y no rompe el build. Cualquier otro error sí.
+export const pedirAlPanelSiExiste = async <T>(ruta: string): Promise<T | null> => {
+  try {
+    return await pedirAlPanel<T>(ruta);
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith("El panel respondió 404")) return null;
+    throw error;
+  }
+};
+
 export type ListaDelPanel<T> = { docs: T[]; totalDocs: number };
 
 // Una foto tal como la devuelve el panel (colección "medios").

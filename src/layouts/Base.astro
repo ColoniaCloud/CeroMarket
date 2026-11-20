@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { getImage } from "astro:assets";
 import Cabecera from "../components/Cabecera.astro";
 import Pie from "../components/Pie.astro";
+import Resenas from "../components/Resenas.astro";
 import fotoPorDefecto from "../assets/sitio/local-gondolas.jpg";
 import type { Foto } from "../lib/payload";
 
@@ -59,6 +60,7 @@ const imagenSocial = await getImage({
     <main id="contenido" class="flex-1">
       <slot />
     </main>
+    <Resenas />
     <Pie />
 
     <div

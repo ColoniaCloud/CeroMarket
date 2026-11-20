@@ -138,6 +138,27 @@ Pendiente de la carga real (hacerla en el panel de producción):
 - ~950 productos nuevos salen **sin foto y sin descripción** (se publican con
   nombre y precio); queda hacer la imagen de relleno.
 
+## Íconos, títulos, mapa y reseñas (2026-11-20)
+
+- **Íconos:** Phosphor, peso "bold" (ver el README). Hoy en los 3 pasos de
+  «Así se compra a granel», en los medios de contacto del pie (WhatsApp, email,
+  Instagram, Facebook) y en las reseñas.
+- **Títulos:** ninguno va en mayúsculas sostenidas (tampoco los nombres de las
+  categorías de la portada).
+- **Pie:** mapa de Google Maps embebido con el perfil del local, al lado de
+  «Traé tus frascos».
+- **Reseñas de Google** antes del pie, en todas las páginas: colección nueva
+  en el panel, campos nuevos en «Datos del local» y sincronización opcional
+  con la API de Google. El sitio tolera que el panel publicado todavía no tenga
+  la colección o los campos (por eso el orden de publicación no importa).
+
+Pendiente de eso:
+- **Clave `GOOGLE_PLACES_API_KEY`** en hPanel para sincronizar; hasta
+  entonces la sección muestra el puntaje y el total cargados, y las reseñas
+  que se carguen a mano.
+- Probar «Sincronizar con Google» con la clave real (se probó la lógica con una
+  respuesta simulada).
+
 ## Falta
 
 1. Resolver la lista de arriba (fotos, posts, logo en SVG).

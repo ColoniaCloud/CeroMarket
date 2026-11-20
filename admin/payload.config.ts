@@ -11,6 +11,7 @@ import { Importaciones } from "./collections/Importaciones";
 import { Medios } from "./collections/Medios";
 import { Posts } from "./collections/Posts";
 import { Productos } from "./collections/Productos";
+import { Resenas } from "./collections/Resenas";
 import { Usuarios } from "./collections/Usuarios";
 import { Ajustes } from "./globals/Ajustes";
 import { directorioDeDatos, secretoDelPanel } from "./lib/datos";
@@ -33,7 +34,7 @@ export default buildConfig({
     },
   },
   i18n: { supportedLanguages: { es }, fallbackLanguage: "es" },
-  collections: [Productos, Categorias, Importaciones, Posts, Medios, Usuarios, Ignorados],
+  collections: [Productos, Categorias, Importaciones, Posts, Resenas, Medios, Usuarios, Ignorados],
   globals: [Ajustes],
   db: sqliteAdapter({
     // Las migraciones son la única fuente de verdad del esquema, también en

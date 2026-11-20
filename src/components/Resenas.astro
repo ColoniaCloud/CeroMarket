@@ -1,0 +1,99 @@
+---
+// Reseñas de Google Maps antes del pie, en todas las páginas. Si el panel no
+// tiene ni reseñas ni puntaje cargados, no se muestra nada.
+import Icono from "./Icono.astro";
+import { ajustes, enlaceParaResenar } from "../lib/ajustes";
+import { obtenerResenas } from "../lib/resenas";
+
+const resenas = obtenerResenas();
+const { puntajeGoogle: puntaje, totalResenasGoogle: total } = ajustes;
+
+const formato = new Intl.NumberFormat("es-UY", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const iniciales = (autor: string) =>
+  autor
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((parte) => parte.charAt(0).toUpperCase())
+    .join("");
+
+const cinco = [1, 2, 3, 4, 5];
+---
+
+{
+  (resenas.length > 0 || puntaje != null) && (
+    <section aria-labelledby="resenas-titulo" class="bg-niebla">
+      <div class="contenedor py-20 lg:py-28">
+        <div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-8">
+          <div>
+            <h2 id="resenas-titulo" class="titular-cartel max-w-[14ch] text-[clamp(2.5rem,6vw,5rem)]">
+              Lo que dicen de nosotros
+            </h2>
+            {puntaje != null && (
+              <div class="mt-8 flex items-center gap-5">
+                <span class="titular-cartel text-7xl leading-none">{formato.format(puntaje)}</span>
+                <div>
+                  <div role="img" aria-label={`${formato.format(puntaje)} de 5 estrellas`} class="flex gap-0.5 text-miel">
+                    {cinco.map((numero) => (
+                      <Icono nombre="star" tamano={22} class={numero <= Math.round(puntaje) ? "" : "opacity-25"} />
+                    ))}
+                  </div>
+                  <p class="mt-1 text-gris">
+                    {total != null ? `${total} reseñas` : "Reseñas"} en Google Maps
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href={ajustes.mapa} target="_blank" rel="noopener" class="boton boton-borde">Ver en Google Maps</a>
+            <a href={enlaceParaResenar} target="_blank" rel="noopener" class="boton">Dejar una reseña</a>
+          </div>
+        </div>
+
+        {resenas.length > 0 && (
+          <>
+            <ul class="-mx-4 mt-12 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:scroll-px-0 sm:px-0 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-3">
+              {resenas.map((resena) => (
+                <li class="w-[85%] shrink-0 snap-start md:w-auto">
+                  <figure class="flex h-full flex-col rounded-lg bg-blanco p-6">
+                    <div role="img" aria-label={`${resena.estrellas} de 5 estrellas`} class="flex gap-0.5 text-miel">
+                      {cinco.map((numero) => (
+                        <Icono nombre="star" tamano={20} class={numero <= resena.estrellas ? "" : "opacity-25"} />
+                      ))}
+                    </div>
+                    <blockquote class="mt-4 line-clamp-6 flex-1 leading-relaxed">{resena.texto}</blockquote>
+                    <figcaption class="mt-5 flex items-center gap-3 border-t border-linea pt-4">
+                      <span aria-hidden="true" class="flex size-10 shrink-0 items-center justify-center rounded-full bg-menta font-semibold text-pizarra">
+                        {iniciales(resena.autor)}
+                      </span>
+                      <div class="min-w-0">
+                        <p class="truncate font-semibold">{resena.autor}</p>
+                        {resena.cuando && <p class="text-sm text-gris">{resena.cuando}</p>}
+                      </div>
+                      {resena.enlace && (
+                        <a
+                          href={resena.enlace}
+                          target="_blank"
+                          rel="noopener"
+                          aria-label={`Ver la reseña de ${resena.autor} en Google Maps`}
+                          class="ml-auto flex size-9 shrink-0 items-center justify-center rounded-full text-gris transition-colors hover:bg-niebla hover:text-pizarra"
+                        >
+                          <Icono nombre="arrowUpRight" tamano={18} />
+                        </a>
+                      )}
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+            <p class="mt-6 flex items-center gap-2 text-sm text-gris">
+              <Icono nombre="google" tamano={16} />
+              Reseñas de Google Maps
+            </p>
+          </>
+        )}
+      </div>
+    </section>
+  )
+}

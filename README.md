@@ -43,9 +43,11 @@ En https://admin.ceromarket.com.uy, con usuario y contraseña:
   descripción, fotos, venta empaquetada o a granel, disponible, publicado,
   destacado, código del CRM), categorías (con su orden) y **listas de
   precios** (ver más abajo).
-- **Contenido:** notas y recetas, con borradores, y la biblioteca de fotos.
+- **Contenido:** notas y recetas, con borradores, **reseñas** de Google Maps
+  y la biblioteca de fotos.
 - **Administración:** usuarios y "Datos del local" (WhatsApp de pedidos,
-  dirección, horario, redes, texto de envíos).
+  dirección, horario, redes, texto de envíos, mapa del pie y puntaje en
+  Google).
 
 Al guardar, el panel pide a GitHub que vuelva a compilar y publicar el
 sitio: el cambio se ve en ceromarket.com.uy en unos 2 o 3 minutos. Para eso
@@ -128,6 +130,17 @@ desde el número del cliente.
   pizarras de precio. Tokens en `src/styles/global.css`.
 - La menta no se usa nunca como color de texto sobre blanco (contraste
   1.91:1): solo como superficie.
+- Los títulos van en minúsculas (solo la primera letra, como una frase): no
+  se usa `uppercase` en ningún título.
+- Íconos: [Phosphor](https://phosphoricons.com) en peso "bold" (trazo
+  redondeado y grueso, como el titular y los botones en píldora). Se importan
+  de a uno en `src/lib/iconos.ts` y se usan con `<Icono nombre="jar" />`; para
+  sumar uno, agregar su línea ahí.
+- Antes del pie, en todas las páginas, está la sección de **reseñas de
+  Google Maps** (`src/components/Resenas.astro`, dentro de `Base.astro`): puntaje
+  y total más hasta 6 reseñas del panel. Si el panel no tiene nada cargado,
+  no se muestra. El pie lleva el mapa de Google embebido con el perfil del
+  local.
 - Todo funciona sin JavaScript. Los scripts suman: filtro y buscador del
   catálogo con animación FLIP, entrada de la portada y fotos que cambian
   con el scroll en Misión. Con "reducir movimiento" activado no se anima.

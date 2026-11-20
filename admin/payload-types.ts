@@ -71,6 +71,7 @@ export interface Config {
     categorias: Categoria;
     importaciones: Importacione;
     posts: Post;
+    resenas: Resena;
     medios: Medio;
     usuarios: Usuario;
     ignorados: Ignorado;
@@ -85,6 +86,7 @@ export interface Config {
     categorias: CategoriasSelect<false> | CategoriasSelect<true>;
     importaciones: ImportacionesSelect<false> | ImportacionesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    resenas: ResenasSelect<false> | ResenasSelect<true>;
     medios: MediosSelect<false> | MediosSelect<true>;
     usuarios: UsuariosSelect<false> | UsuariosSelect<true>;
     ignorados: IgnoradosSelect<false> | IgnoradosSelect<true>;
@@ -306,6 +308,31 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Las reseñas que se muestran antes del pie de todas las páginas. Se traen de Google Maps con «Sincronizar con Google» o se cargan a mano.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resenas".
+ */
+export interface Resena {
+  id: number;
+  autor: string;
+  estrellas: number;
+  /**
+   * Ej: hace 2 meses
+   */
+  cuando?: string | null;
+  texto: string;
+  /**
+   * Opcional: dónde se ve la reseña en Google Maps.
+   */
+  enlace?: string | null;
+  publicada?: boolean | null;
+  origen?: ('manual' | 'google') | null;
+  idGoogle?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "usuarios".
  */
@@ -385,6 +412,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'resenas';
+        value: number | Resena;
       } | null)
     | ({
         relationTo: 'medios';
@@ -515,6 +546,22 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resenas_select".
+ */
+export interface ResenasSelect<T extends boolean = true> {
+  autor?: T;
+  estrellas?: T;
+  cuando?: T;
+  texto?: T;
+  enlace?: T;
+  publicada?: T;
+  origen?: T;
+  idGoogle?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "medios_select".
  */
 export interface MediosSelect<T extends boolean = true> {
@@ -637,6 +684,19 @@ export interface Ajuste {
   instagram: string;
   facebook: string;
   envios: string;
+  /**
+   * En Google Maps: Compartir → Incorporar un mapa → copiá solo la dirección que está dentro de src="…". Vacío: se busca el local por su dirección.
+   */
+  mapaIncrustado?: string | null;
+  /**
+   * Ej: 4.8. «Sincronizar con Google» (en Reseñas) lo actualiza.
+   */
+  puntajeGoogle?: number | null;
+  totalResenasGoogle?: number | null;
+  /**
+   * Lo completa «Sincronizar con Google». Sirve para el botón «Dejar una reseña».
+   */
+  googlePlaceId?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -653,6 +713,10 @@ export interface AjustesSelect<T extends boolean = true> {
   instagram?: T;
   facebook?: T;
   envios?: T;
+  mapaIncrustado?: T;
+  puntajeGoogle?: T;
+  totalResenasGoogle?: T;
+  googlePlaceId?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -18,7 +18,7 @@ const entrar = () => {
   gsap.set([titular, foto, ...textos], { visibility: "visible" });
   raiz.classList.remove("animar");
 
-  // Las máscaras por línea recortan un poco las tildes de las mayúsculas:
+  // Las máscaras por línea pueden recortar un poco las tildes:
   // por eso el texto entra con un fundido y, al terminar, se deshace la
   // división y queda el HTML original.
   SplitText.create(titular, {

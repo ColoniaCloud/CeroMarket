@@ -13,9 +13,24 @@ const Ajustes = z.object({
   mapa: z.url(),
   horario: z.string().min(1),
   envios: z.string().min(1),
+  // Opcionales: un panel que todavía no los tiene (o los dejó vacíos) no rompe el sitio.
+  mapaIncrustado: z.url().nullish(),
+  googlePlaceId: z.string().nullish(),
+  puntajeGoogle: z.number().min(1).max(5).nullish(),
+  totalResenasGoogle: z.number().int().min(0).nullish(),
 });
 
 export const ajustes = Ajustes.parse(await pedirAlPanel("/api/globals/ajustes?depth=0"));
+
+// Mapa de Google para incrustar. Sin enlace propio, se busca el local por su dirección.
+export const mapaParaIncrustar: string =
+  ajustes.mapaIncrustado ??
+  `https://www.google.com/maps?q=${encodeURIComponent(`CERO Market ${ajustes.direccion}`)}&output=embed&hl=es`;
+
+// Para dejar una reseña hace falta el ID del lugar; sin él, se abre la ficha del local.
+export const enlaceParaResenar: string = ajustes.googlePlaceId
+  ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(ajustes.googlePlaceId)}`
+  : ajustes.mapa;
 
 export const enlaceWhatsapp = (mensaje?: string): string => {
   const base = `https://wa.me/${ajustes.whatsapp}`;

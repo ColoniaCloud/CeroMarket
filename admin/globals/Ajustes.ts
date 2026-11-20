@@ -26,5 +26,48 @@ export const Ajustes: GlobalConfig = {
     { name: "instagram", label: "Instagram", type: "text", required: true, validate: url },
     { name: "facebook", label: "Facebook", type: "text", required: true, validate: url },
     { name: "envios", label: "Texto de envíos", type: "textarea", required: true },
+    {
+      type: "collapsible",
+      label: "Google Maps y reseñas",
+      fields: [
+        {
+          name: "mapaIncrustado",
+          label: "Mapa para el pie del sitio",
+          type: "text",
+          validate: url,
+          admin: {
+            description:
+              "En Google Maps: Compartir → Incorporar un mapa → copiá solo la dirección que está dentro de src=\"…\". Vacío: se busca el local por su dirección.",
+          },
+        },
+        {
+          type: "row",
+          fields: [
+            {
+              name: "puntajeGoogle",
+              label: "Puntaje en Google",
+              type: "number",
+              min: 1,
+              max: 5,
+              admin: { width: "50%", step: 0.1, description: "Ej: 4.8. «Sincronizar con Google» (en Reseñas) lo actualiza." },
+            },
+            {
+              name: "totalResenasGoogle",
+              label: "Cantidad de reseñas",
+              type: "number",
+              min: 0,
+              admin: { width: "50%", step: 1 },
+              validate: (valor: unknown) => valor == null || Number.isInteger(valor) || "Un número entero.",
+            },
+          ],
+        },
+        {
+          name: "googlePlaceId",
+          label: "ID del lugar en Google",
+          type: "text",
+          admin: { description: "Lo completa «Sincronizar con Google». Sirve para el botón «Dejar una reseña»." },
+        },
+      ],
+    },
   ],
 };

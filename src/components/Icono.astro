@@ -1,0 +1,27 @@
+---
+import { iconos, type NombreIcono } from "../lib/iconos";
+
+interface Props {
+  nombre: NombreIcono;
+  tamano?: number;
+  class?: string;
+}
+
+const { nombre, tamano = 24, class: clase } = Astro.props;
+
+// Cada archivo de Phosphor es un <svg> con el dibujo adentro: se reutiliza
+// solo el dibujo para fijar acá el tamaño y esconderlo a los lectores de
+// pantalla (el texto de al lado dice lo mismo).
+const dibujo = iconos[nombre].replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
+---
+
+<svg
+  viewBox="0 0 256 256"
+  fill="currentColor"
+  width={tamano}
+  height={tamano}
+  aria-hidden="true"
+  focusable="false"
+  class={clase}
+  set:html={dibujo}
+/>

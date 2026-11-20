@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/sitio/logo-claro.png";
-import { ajustes, enlaceWhatsapp } from "../lib/ajustes";
+import Icono from "./Icono.astro";
+import { ajustes, enlaceWhatsapp, mapaParaIncrustar } from "../lib/ajustes";
 
 const telefono = `+${ajustes.whatsapp.slice(0, 3)} ${ajustes.whatsapp.slice(3, 5)} ${ajustes.whatsapp.slice(5, 8)} ${ajustes.whatsapp.slice(8)}`;
 
@@ -12,15 +13,34 @@ const sitio = [
   { href: "/contacto/", texto: "Contacto" },
   { href: "/trabaja-con-nosotros/", texto: "Trabajá con nosotros" },
 ];
+
+const contacto = [
+  { icono: "whatsapp", texto: `WhatsApp ${telefono}`, href: enlaceWhatsapp(), externo: true },
+  { icono: "envelope", texto: ajustes.email, href: `mailto:${ajustes.email}`, externo: false },
+  { icono: "instagram", texto: "Instagram", href: ajustes.instagram, externo: true },
+  { icono: "facebook", texto: "Facebook", href: ajustes.facebook, externo: true },
+] as const;
 ---
 
 <footer class="bg-pizarra text-blanco">
   <div class="contenedor pt-16 pb-10 lg:pt-24">
-    <p class="titular-cartel max-w-[12ch] text-[clamp(3rem,9vw,7.5rem)] text-menta-clara uppercase">
-      Traé tus frascos.
-    </p>
+    <div class="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
+      <p class="titular-cartel max-w-[12ch] text-[clamp(3rem,9vw,7.5rem)] text-menta-clara">
+        Traé tus frascos.
+      </p>
+      <div class="aspect-[4/3] overflow-hidden rounded-lg bg-blanco/10 sm:aspect-[16/10]">
+        <iframe
+          src={mapaParaIncrustar}
+          title="Mapa de Google con la ubicación y el perfil de CERO Market"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          class="size-full border-0"
+        ></iframe>
+      </div>
+    </div>
 
-    <div class="mt-14 grid gap-10 border-t border-blanco/15 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-14 grid gap-10 border-t border-blanco/15 pt-10 sm:grid-cols-2 lg:grid-cols-[1fr_1.35fr_1fr_1fr]">
       <section aria-labelledby="pie-local">
         <h2 id="pie-local" class="text-sm font-semibold text-menta-clara">El local</h2>
         <address class="mt-3 not-italic">
@@ -33,11 +53,24 @@ const sitio = [
 
       <section aria-labelledby="pie-contacto">
         <h2 id="pie-contacto" class="text-sm font-semibold text-menta-clara">Contacto</h2>
-        <ul class="mt-3 space-y-1.5">
-          <li><a href={enlaceWhatsapp()} target="_blank" rel="noopener" class="enlace">WhatsApp {telefono}</a></li>
-          <li><a href={`mailto:${ajustes.email}`} class="enlace">{ajustes.email}</a></li>
-          <li><a href={ajustes.instagram} target="_blank" rel="noopener" class="enlace">Instagram</a></li>
-          <li><a href={ajustes.facebook} target="_blank" rel="noopener" class="enlace">Facebook</a></li>
+        <ul class="mt-3 space-y-2">
+          {
+            contacto.map((medio) => (
+              <li>
+                <a
+                  href={medio.href}
+                  target={medio.externo ? "_blank" : undefined}
+                  rel={medio.externo ? "noopener" : undefined}
+                  class="group inline-flex items-center gap-2.5"
+                >
+                  <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-blanco/10 text-menta-clara transition-colors duration-200 group-hover:bg-menta group-hover:text-pizarra">
+                    <Icono nombre={medio.icono} tamano={20} />
+                  </span>
+                  <span class="enlace">{medio.texto}</span>
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </section>
 

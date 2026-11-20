@@ -14,6 +14,7 @@
   --color-menta-tinta: #2c6e64;  /* enlaces sobre blanco: 5.96:1 */
   --color-pizarra: #222426;      /* tinta y etiquetas de precio */
   --color-gris: #5b615f;         /* texto secundario: 6.33:1 */
+  --color-miel: #b8730a;         /* estrellas de las reseñas: 3.9:1 sobre niebla */
   --color-linea: rgb(34 36 38 / 0.12);
 
   --font-sans: "Bricolage Grotesque Variable", system-ui, sans-serif;
@@ -97,6 +98,10 @@
   }
   .boton-borde:hover { background: var(--color-pizarra); color: var(--color-blanco); }
 
+  /* Para fondos oscuros (la portada). */
+  .boton-menta { background: var(--color-menta); color: var(--color-pizarra); }
+  .boton-menta:hover { background: var(--color-blanco); }
+
   .enlace {
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -171,6 +176,20 @@
 .menu-movil:popover-open { opacity: 1; translate: 0 0; }
 @starting-style {
   .menu-movil:popover-open { opacity: 0; translate: 0 -1.5rem; }
+}
+
+/* Portada: la foto del local queda fija, con una capa de verde oscuro
+   encima que apenas la deja ver. */
+.portada {
+  --portada-foto: var(--foto-grande);
+  --portada-capa: rgb(6 36 30 / 0.93);
+  background:
+    linear-gradient(var(--portada-capa), var(--portada-capa)),
+    var(--portada-foto) center / cover fixed;
+  color: var(--color-blanco);
+}
+@media (max-width: 767px) {
+  .portada { --portada-foto: var(--foto-chica); }
 }
 
 /* Entrada de la portada: el contenido arranca oculto solo si el script de

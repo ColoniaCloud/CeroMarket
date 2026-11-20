@@ -6,5 +6,8 @@
   "direccion": "José Martí 3441, Pocitos, Montevideo",
   "mapa": "https://maps.app.goo.gl/8MRDmZoYJKFR5Zbv6",
   "horario": "De 9 a 21 h",
-  "envios": "Envíos en el día a todo Montevideo y en 24 horas al interior del país."
+  "envios": "Envíos en el día a todo Montevideo y en 24 horas al interior del país.",
+  "mapaIncrustado": "https://www.google.com/maps?cid=3435888497562594688&output=embed&hl=es",
+  "puntajeGoogle": 4.8,
+  "totalResenasGoogle": 123
 }

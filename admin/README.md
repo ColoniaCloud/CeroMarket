@@ -28,7 +28,7 @@ Para ver el sitio con este panel local, desde la raíz del repo:
 | Grupo           | Qué se edita                                                                      |
 | --------------- | --------------------------------------------------------------------------------- |
 | Catálogo        | Productos, categorías y **listas de precios** (el PDF mensual del CRM).           |
-| Contenido       | Notas y recetas (con borradores) y la biblioteca de fotos.                        |
+| Contenido       | Notas y recetas (con borradores), **reseñas** de Google y la biblioteca de fotos.  |
 | Administración  | Usuarios, «Datos del local» (WhatsApp de pedidos, etc.) y «Códigos ignorados».    |
 
 - `collections/` y `globals/`: los esquemas, en español.
@@ -43,6 +43,29 @@ Para ver el sitio con este panel local, desde la raíz del repo:
 La API es de solo lectura sin sesión: productos **publicados**, categorías,
 fotos y datos del local son públicos; las notas en borrador, los usuarios, las
 listas de precios y los códigos ignorados no.
+
+## Reseñas de Google Maps
+
+Contenido → Reseñas. Son las que se muestran antes del pie de todas las
+páginas, junto con el puntaje y el total de «Datos del local → Google Maps y
+reseñas» (hoy 4,8 con 123, al 2026-11-20). Dos formas de cargarlas, que se
+pueden combinar:
+
+- **A mano:** autor, estrellas, texto y, si se quiere, el enlace a la reseña.
+  «Mostrar en el sitio» destildado la oculta.
+- **Sincronizar con Google** (botón arriba de la lista): trae el puntaje, el
+  total y las 5 reseñas más relevantes con la API oficial de Google (Places
+  API, versión nueva). Las que ya estaban se actualizan y las nuevas se
+  agregan; no se borra nada y lo que se ocultó queda oculto. Hace falta la
+  variable `GOOGLE_PLACES_API_KEY` (abajo). Sin la clave el botón avisa y el
+  resto del panel funciona igual. Google entrega solo 5 reseñas por pedido:
+  con el tiempo se juntan más.
+
+Código: `collections/Resenas.ts`, `lib/googleResenas.ts` (la llamada a Google
+se probó con una respuesta simulada, no con una clave real) y
+`components/SincronizarResenas.tsx` (el botón). El mapa del pie sale de
+«Mapa para el pie del sitio» (la dirección que da Google Maps en Compartir →
+Incorporar un mapa); vacío, se busca el local por su dirección.
 
 ## Productos
 
@@ -109,6 +132,10 @@ mensaje claro; ahí se ajusta la lectura.
     workflow «Publicar» al guardar. Sin él, el panel funciona igual pero
     guardar no republica el sitio (queda un aviso en los logs). Se carga a
     mano en hPanel; no va en el repo.
+  - `GOOGLE_PLACES_API_KEY` (opcional): clave de Google Cloud con
+    **Places API (New)** habilitada, para «Sincronizar con Google». Conviene
+    restringirla a esa API. Se carga a mano en hPanel; no va en el repo. La
+    API tiene un cupo mensual gratis; el botón hace un solo pedido por vez.
   - `PAYLOAD_SECRET` es opcional: si no está, el panel genera la clave la
     primera vez y la guarda en `PAYLOAD_DATA_DIR/.secreto`.
 - Los logs de arranque muestran `[datos] PAYLOAD_DATA_DIR -> …`: es la forma

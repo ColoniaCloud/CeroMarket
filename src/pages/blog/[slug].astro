@@ -26,7 +26,7 @@ const volver = tipo === "receta" ? { href: "/recetas/", texto: "Todas las receta
         <a href={volver.href} class="enlace font-semibold text-pizarra">{tipo === "receta" ? "Receta" : "Nota"}</a>
         {fecha && <time datetime={post.data.fecha?.toISOString()}>{fecha}</time>}
       </p>
-      <h1 class="titular-cartel mt-4 max-w-[18ch] text-[clamp(2.75rem,7vw,6rem)] uppercase">{titulo}</h1>
+      <h1 class="titular-cartel mt-4 max-w-[18ch] text-[clamp(2.75rem,7vw,6rem)]">{titulo}</h1>
       {bajada && <p class="mt-8 max-w-[60ch] text-xl leading-relaxed">{bajada}</p>}
     </header>
 
