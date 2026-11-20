@@ -11,13 +11,8 @@ import { Posts } from "./collections/Posts";
 import { Productos } from "./collections/Productos";
 import { Usuarios } from "./collections/Usuarios";
 import { Ajustes } from "./globals/Ajustes";
-import { directorioDeDatos } from "./lib/datos";
+import { directorioDeDatos, secretoDelPanel } from "./lib/datos";
 import { migrations } from "./migrations";
-
-const secreto = process.env.PAYLOAD_SECRET;
-if (!secreto && process.env.NODE_ENV === "production") {
-  throw new Error("Falta PAYLOAD_SECRET: el panel no arranca sin una clave para firmar las sesiones.");
-}
 
 export default buildConfig({
   admin: {
@@ -33,7 +28,7 @@ export default buildConfig({
     prodMigrations: migrations,
   }),
   editor: lexicalEditor(),
-  secret: secreto || "solo-para-desarrollo-local",
+  secret: secretoDelPanel,
   sharp,
   typescript: { outputFile: path.resolve("payload-types.ts") },
 });

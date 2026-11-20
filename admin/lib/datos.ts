@@ -1,4 +1,5 @@
-import { mkdirSync } from "node:fs";
+import { randomBytes } from "node:crypto";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 // La base SQLite y las fotos viven en disco, así que la carpeta tiene que
@@ -22,3 +23,20 @@ if (process.env.NODE_ENV === "production") {
     );
   }
 }
+
+// La clave que firma las sesiones del panel. Si no viene en PAYLOAD_SECRET,
+// se genera la primera vez y queda guardada en la carpeta de datos (que es
+// persistente): así nadie tiene que manejarla ni copiarla a ningún lado. Si
+// esa carpeta se pierde, se genera otra y solo hay que volver a iniciar sesión.
+const archivoDeSecreto = path.join(directorioDeDatos, ".secreto");
+
+const leerOCrearSecreto = (): string => {
+  try {
+    writeFileSync(archivoDeSecreto, randomBytes(48).toString("base64url"), { flag: "wx", mode: 0o600 });
+  } catch {
+    // Ya existía (o lo creó otro proceso del build al mismo tiempo).
+  }
+  return readFileSync(archivoDeSecreto, "utf8").trim();
+};
+
+export const secretoDelPanel = process.env.PAYLOAD_SECRET || leerOCrearSecreto();
